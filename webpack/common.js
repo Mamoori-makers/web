@@ -18,6 +18,7 @@ module.exports = {
   resolve: {
     alias: {
       '@': path.resolve('src'),
+      '@public': path.resolve('public'),
     },
     modules: ['node_modules'],
     extensions: ['.js', '.ts', '.jsx', '.tsx'],
@@ -63,7 +64,7 @@ module.exports = {
         },
       },
       {
-        test: /\.(jpe?g|png|gif|mp3|svg|woff)$/,
+        test: /\.(jpe?g|png|gif|mp3|svg|woff|woff2)$/,
         type: 'asset/resource',
       },
     ],
