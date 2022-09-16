@@ -1,4 +1,6 @@
 /* eslint-disable global-require */
+import { useState } from 'react';
+
 import { MenuItem } from './MenuItem';
 import * as S from './style';
 
@@ -13,9 +15,20 @@ import useMovePage from '@/hooks/useMovePage';
 export const NavBar = () => {
   const [goHome, goMy] = useMovePage(['/', '/my']);
   const isLoggedIn = useIsLoggedIn();
+  const [isActive, setIsActive] = useState(false);
+
+  const changeBackground = () => {
+    if (window.scrollY > 75) {
+      setIsActive(true);
+    } else {
+      setIsActive(false);
+    }
+  };
+
+  window.addEventListener('scroll', changeBackground);
 
   return (
-    <S.NavBar>
+    <S.NavBar active={isActive}>
       <S.MamooriLogo
         src={require('../../assets/Mamoori_logo.png')}
         alt="Mamoori_logo"
@@ -28,7 +41,8 @@ export const NavBar = () => {
         {isLoggedIn ? (
           <UserProfile size="small" onClick={goMy} />
         ) : (
-          <Button text="LOGIN" size="small" />
+          <UserProfile size="small" onClick={goMy} />
+          // <Button text="LOGIN" size="small" />
         )}
       </S.Menu>
     </S.NavBar>

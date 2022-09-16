@@ -2,13 +2,14 @@ import styled from 'styled-components';
 
 import { flexBox } from '@/styles/flexBox';
 
-const NavBar = styled.div`
+const NavBar = styled.div<{ active: boolean }>`
   ${flexBox({ justifyContent: 'space-between' })}
-  background: #544e4b;
+  background: ${({ active }) =>
+    active ? `linear-gradient(to right, #413C3A, #67615E)` : `transparent`};
   height: 75px;
   color: #fff;
   padding: 0 150px;
-  position: sticky;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
