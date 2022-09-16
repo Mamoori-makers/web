@@ -1,7 +1,5 @@
 import * as S from './style';
 
-import { USER_DEFAULT_IMG } from '@/constants/constants';
-
 type UserProfile = {
   imgUrl?: string;
   userId?: string;
@@ -11,7 +9,13 @@ type UserProfile = {
 
 const UserProfile = ({ imgUrl, userId, size, onClick }: UserProfile) => {
   return (
-    <S.UserProfile src={imgUrl || USER_DEFAULT_IMG} alt={userId} size={size} onClick={onClick} />
+    <S.UserProfile
+      // eslint-disable-next-line import/no-dynamic-require, global-require
+      src={imgUrl || require('../../../assets/Mamoori_profile.png')}
+      alt={userId}
+      size={size}
+      onClick={onClick}
+    />
   );
 };
 
