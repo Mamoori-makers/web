@@ -3,7 +3,7 @@ import * as S from './style';
 export type ButtonProps = {
   size?: 'large' | 'medium' | 'small';
   color?: 'black';
-  bgColor?: 'yellow';
+  background?: 'yellow';
   type?: 'button' | 'submit' | 'reset';
   onClick?: () => void;
   disabled?: boolean;
@@ -13,7 +13,7 @@ export type ButtonProps = {
 export const Button = ({
   size = 'large',
   color = 'black',
-  bgColor = 'yellow',
+  background = 'yellow',
   type = 'button',
   onClick,
   text,
@@ -22,7 +22,7 @@ export const Button = ({
   return (
     <S.Button
       size={size}
-      bgColor={bgColor}
+      background={background}
       color={color}
       type={type}
       onClick={onClick}

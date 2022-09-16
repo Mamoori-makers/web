@@ -54,10 +54,10 @@ const colorObj = {
 };
 
 // Button Component
-const Button = styled.button<{ size: 'large' | 'medium' | 'small'; bgColor: 'yellow' }>`
+const Button = styled.button<{ size: 'large' | 'medium' | 'small'; background: 'yellow' }>`
   ${flexBox({})}
   ${({ size }) => size && sizeObj[size]};
-  ${({ bgColor }) => bgColor && colorObj[bgColor]};
+  ${({ background }) => background && colorObj[background]};
   transition: 200ms ease;
 
   letter-spacing: 2.5px;
