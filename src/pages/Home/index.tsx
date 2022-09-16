@@ -1,23 +1,23 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import styled from 'styled-components';
-
 import { IntroBox } from './IntroBox';
 
-import { Banner } from '@/components/Banner';
+import { Banner } from '@/components/common/Banner';
 import { BANNER, INTRO_BOX } from '@/constants/home';
 import { ROUTE } from '@/constants/routes';
 import useMovePage from '@/hooks/useMovePage';
-
-const Container = styled.div`
-  margin: 0 150px;
-`;
+import { Container } from '@/styles/common';
 
 export const Home = () => {
   const [goRoadMap] = useMovePage([ROUTE.roadmap]);
 
   return (
     <>
-      <Banner mainText={BANNER.TOP.main} subText={BANNER.TOP.sub} />
+      <Banner
+        mainText={BANNER.TOP.main}
+        subText={BANNER.TOP.sub}
+        size="large"
+        background="https://files.wallpaperpass.com/2019/09/4k%20space%20008%20-%202560x1024.jpg"
+      />
 
       <Container>
         {INTRO_BOX.map(v => (
@@ -25,7 +25,8 @@ export const Home = () => {
         ))}
       </Container>
       <Banner
-        bgColor="brown"
+        background="brown"
+        size="large"
         mainText={BANNER.BOTTOM.main}
         subText={BANNER.BOTTOM.sub}
         hasButton
