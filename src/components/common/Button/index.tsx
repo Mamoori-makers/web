@@ -2,8 +2,8 @@ import * as S from './style';
 
 export type ButtonProps = {
   size?: 'large' | 'medium' | 'small';
-  color?: 'black';
-  background?: 'yellow';
+  color?: 'black' | 'white';
+  background?: 'yellow' | 'brown';
   type?: 'button' | 'submit' | 'reset';
   onClick?: () => void;
   disabled?: boolean;

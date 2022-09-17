@@ -49,12 +49,35 @@ const yellow = css`
   }
 `;
 
+const brown = css`
+  color: ${({ theme: { color } }) => color.white};
+  background: linear-gradient(to left, #413c3a, #67615e);
+
+  :disabled {
+    background-color: ${({ theme: { color } }) => color.brown[100]};
+    opacity: 0.7;
+    cursor: default;
+  }
+
+  :not(:disabled):hover {
+    border: 3px solid ${({ theme: { color } }) => color.brown[100]};
+  }
+
+  :focus {
+    border: 3px solid ${({ theme: { color } }) => color.brown[100]};
+  }
+`;
+
 const colorObj = {
   yellow,
+  brown,
 };
 
 // Button Component
-const Button = styled.button<{ size: 'large' | 'medium' | 'small'; background: 'yellow' }>`
+const Button = styled.button<{
+  size: 'large' | 'medium' | 'small';
+  background: 'yellow' | 'brown';
+}>`
   ${flexBox({})}
   ${({ size }) => size && sizeObj[size]};
   ${({ background }) => background && colorObj[background]};
