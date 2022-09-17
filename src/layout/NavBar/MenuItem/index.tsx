@@ -1,8 +1,9 @@
+import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
 import useMovePage from '@/hooks/useMovePage';
 
-const Item = styled.button`
+const Item = styled.button<{ active: boolean }>`
   position: relative;
 
   :after {
@@ -11,11 +12,11 @@ const Item = styled.button`
     content: '';
     display: block;
     height: 2px;
-    left: 50%;
+    left: ${({ active }) => (active ? '0' : '50px')};
     position: absolute;
     background: ${({ theme: { color } }) => color.yellow[200]};
     transition: width 0.3s ease 0s, left 0.3s ease 0s;
-    width: 0;
+    width: ${({ active }) => (active ? '100%' : '0')};
   }
 
   :hover:after {
@@ -26,9 +27,14 @@ const Item = styled.button`
 
 export const MenuItem = ({ name, link }) => {
   const [goPage] = useMovePage(link);
+  const { pathname } = useLocation();
+
+  const checkActive = () => {
+    return pathname.includes(link);
+  };
 
   return (
-    <Item type="button" onClick={goPage}>
+    <Item type="button" onClick={goPage} active={checkActive()}>
       {name}
     </Item>
   );
