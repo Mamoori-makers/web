@@ -8,9 +8,10 @@ const Title = styled.p`
   color: ${({ theme: { color } }) => color.white};
   padding: 10px;
   border-radius: 20px;
-  border: 1px solid ${({ theme: { color } }) => color.brown[100]};
   margin-bottom: 20px;
   background-color: ${({ theme: { color } }) => color.brown[200]};
+  box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.3);
+  letter-spacing: 2px;
 `;
 
 const ContentsBox = styled.div`
