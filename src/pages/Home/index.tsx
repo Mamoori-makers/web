@@ -2,6 +2,7 @@
 import { IntroBox } from './IntroBox';
 
 import { Banner } from '@/components/common/Banner';
+import { BANNER_IMG_URL } from '@/constants/bannerImage';
 import { BANNER, INTRO_BOX } from '@/constants/home';
 import { ROUTE } from '@/constants/routes';
 import useMovePage from '@/hooks/useMovePage';
@@ -16,7 +17,7 @@ export const Home = () => {
         mainText={BANNER.TOP.main}
         subText={BANNER.TOP.sub}
         size="large"
-        background="https://files.wallpaperpass.com/2019/09/4k%20space%20008%20-%202560x1024.jpg"
+        background={BANNER_IMG_URL.home}
       />
 
       <Container>

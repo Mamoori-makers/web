@@ -2,7 +2,7 @@ import { ROUTE } from '@/constants/routes';
 
 export const BANNER = {
   main: '당신을 위해 준비한 마무리 로드맵.',
-  sub: '죽음 준비의 길잡이가 되어드릴게요. 하나하나 차근차근 배워봐요.',
+  sub: ['죽음 준비의 길잡이가 되어드릴게요.', '하나하나 차근차근 배워봐요.'],
 };
 
 export const STEPS = [

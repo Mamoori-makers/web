@@ -2,6 +2,7 @@ import { Outlet } from 'react-router-dom';
 
 import { Banner } from '@/components/common/Banner';
 import { Tabs } from '@/components/common/Tab';
+import { BANNER_IMG_URL } from '@/constants/bannerImage';
 import { BANNER } from '@/constants/will';
 import { Container } from '@/styles/common';
 
@@ -16,7 +17,7 @@ export const Will = () => {
       <Banner
         mainText={BANNER.main}
         subText={BANNER.sub}
-        background="https://wallpaperaccess.com/full/104567.jpg"
+        background={BANNER_IMG_URL.will}
         size="large"
       />
       <Container>

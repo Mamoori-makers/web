@@ -241,8 +241,8 @@ export const LECTURES = [
 ];
 
 export const BANNER = {
-  main: 'Step 1. 강의를 들으며 죽음에 대해 배워보는 시간을 가져보세요.',
-  sub: '죽음을 명확하게 인식하고, 막연한 두려움을 없애보아요.',
+  main: 'Step 1. 강의를 들으며 죽음에 대해 배워볼까요?',
+  sub: ['Mamoori가 준비한 영상을 통해 죽음을 명확하게 인식하고,', '막연한 두려움을 없애보아요.'],
 };
 
 export const CATEGORIES = [

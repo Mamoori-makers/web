@@ -1,11 +1,11 @@
 export const BANNER = {
   TOP: {
     main: '누구나 해야 하는 삶의 마무리.',
-    sub: '체계적인 죽음 준비, 막막하신가요? 삶의 매듭을 짓는 일, Mamoori가 도와드릴게요.',
+    sub: ['체계적인 죽음 준비, 막막하신가요?', '삶의 매듭을 짓는 일, Mamoori가 도와드릴게요.'],
   },
   BOTTOM: {
     main: '죽음에 대해 공부하고 고찰하는 시간을 가져보세요.',
-    sub: '삶을 마무리하는 시간, Mamoori가 함께합니다.',
+    sub: ['당신이 삶을 마무리하는 시간,', 'Mamoori가 함께합니다.'],
     button: '공부하러 갈게요',
   },
 };
@@ -24,7 +24,7 @@ export const INTRO_BOX = [
   {
     title: ['죽음에 대해 이야기하지 않는', '한국 사회.'],
     contents:
-      '우리 사회는 죽음에 대해 터놓고 이야기하기 어렵죠. 커뮤니티에서 죽음과 관련된 주제로 토론해봐요.',
+      '우리 사회는 죽음에 대해 터놓고 이야기하기 어렵죠. 마무리에서 준비한 커뮤니티에서 죽음과 관련된 주제로 자유롭게 토론해봐요.',
     buttonText: '이야기하러 갈게요',
     buttonLink: '/community',
     imageUrl: 'https://livingroomconversations.org/wp-content/uploads/2018/09/talking_politics.jpg',

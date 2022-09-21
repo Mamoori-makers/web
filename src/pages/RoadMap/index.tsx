@@ -2,6 +2,7 @@
 import * as S from './style';
 
 import { Banner } from '@/components/common/Banner';
+import { BANNER_IMG_URL } from '@/constants/bannerImage';
 import { BANNER, STEPS } from '@/constants/roadmap';
 import useMovePage from '@/hooks/useMovePage';
 import { Container } from '@/styles/common';
@@ -34,7 +35,7 @@ export const RoadMap = () => {
       <Banner
         mainText={BANNER.main}
         subText={BANNER.sub}
-        background="https://www.wallpapertip.com/wmimgs/2-25504_galaxy-wallpaper-dual-screen.jpg"
+        background={BANNER_IMG_URL.roadmap}
         size="large"
       />
       <Container>

@@ -1,6 +1,6 @@
 export const BANNER = {
   main: 'Step 3. 체크리스트 작성하기',
-  sub: '당신의 죽음 준비 정도를 체크해 보세요.',
+  sub: ['당신의 죽음 준비 정도를 체크해 보세요.'],
 };
 
 export const CHECK_LIST = [

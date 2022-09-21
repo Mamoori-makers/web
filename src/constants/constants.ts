@@ -1,2 +1,1 @@
-export const USER_DEFAULT_IMG =
-  'https://millingtontownship.com/wp-content/uploads/2021/01/default.jpg';
+export const USER_DEFAULT_IMG = '../../../assets/Mamoori_profile.png';
