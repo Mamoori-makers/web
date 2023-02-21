@@ -1,9 +1,9 @@
 /* eslint-disable no-param-reassign */
 import { useNavigate } from 'react-router-dom';
 
-type MovePageType = (path: string | string[]) => (() => void)[];
+type UseMovePage = (path: string | string[]) => (() => void)[];
 
-const useMovePage: MovePageType = path => {
+export const useMovePage: UseMovePage = path => {
   const navigate = useNavigate();
 
   if (typeof path === 'string') {
@@ -12,5 +12,3 @@ const useMovePage: MovePageType = path => {
 
   return path.map(p => () => navigate(p));
 };
-
-export default useMovePage;
