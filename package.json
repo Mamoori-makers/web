@@ -6,7 +6,8 @@
   "scripts": {
     "start": "webpack serve --env=development",
     "build": "webpack --env=production",
-    "prod": "webpack serve --env=production"
+    "prod": "webpack serve --env=production",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -60,6 +61,7 @@
     "eslint-plugin-react-hooks": "^4.3.0",
     "html-webpack-plugin": "^5.5.0",
     "husky": "^8.0.0",
+    "lint-staged": "^13.1.2",
     "mini-css-extract-plugin": "^2.6.0",
     "msw": "^0.42.3",
     "prettier": "^2.6.2",
@@ -74,5 +76,11 @@
   },
   "msw": {
     "workerDirectory": "public"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "prettier --cache --write",
+      "eslint --cache --fix"
+    ]
   }
 }
