@@ -42,7 +42,7 @@ export const GNB = () => {
             <Link
               key={name}
               href={link}
-              className={`mr-5 text-sm text-[#eaeaea] ${activeStyle}`}
+              className={`mr-5 text-sm text-[#eaeaea] ${activeStyle} hover:text-white`}
               style={{ textShadow: '2px 2px 10px #413c3a' }}
             >
               {name}
