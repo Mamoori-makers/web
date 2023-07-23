@@ -30,11 +30,11 @@ export const Banner = ({ bannerData }: BannerProps) => {
         style={{ objectFit: 'cover' }}
       />
       <div
-        className="absolute bottom-3 flex w-full flex-col text-center text-white opacity-50"
+        className="absolute bottom-1/2 flex w-full flex-col text-center text-white opacity-50"
         style={{
           opacity: `${slide && '1'}`,
           transition: `${slide && '1s'}`,
-          bottom: `${slide && '30%'}`,
+          bottom: `${slide && '35%'}`,
         }}
       >
         <p className="mb-7 text-5xl font-bold" style={{ textShadow: '3px 3px 13px #413c3a' }}>
