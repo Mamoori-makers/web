@@ -1,18 +1,19 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export const useChangeBgByScroll = () => {
-  const [GNBBackground, setGNBBackground] = useState('');
+  const GNB_HEIGHT_PX = 64;
+  const GNB_BACKGROUND_STYLE = 'linear-gradient(to right, #413C3A, #67615E)';
+  const [GNBBackground, setGNBBackground] = useState(
+    window.scrollY > GNB_HEIGHT_PX ? GNB_BACKGROUND_STYLE : ''
+  );
 
   const changeGNBBackground = () => {
-    const GNB_HEIGHT_PX = 64;
-    if (window.scrollY > GNB_HEIGHT_PX) {
-      setGNBBackground('linear-gradient(to right, #413C3A, #67615E)');
-    } else {
-      setGNBBackground('');
-    }
+    window.scrollY > GNB_HEIGHT_PX ? setGNBBackground(GNB_BACKGROUND_STYLE) : setGNBBackground('');
   };
 
-  window.addEventListener('scroll', changeGNBBackground);
+  useEffect(() => {
+    window.addEventListener('scroll', changeGNBBackground);
+  }, []);
 
   return {
     GNBBackground,
