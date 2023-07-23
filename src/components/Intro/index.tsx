@@ -5,15 +5,13 @@ type IntroItemProps = {
     mainText: string;
     subText: string;
     imageUrl: string;
-    buttonText: string;
-    link: string;
     id: string;
     hasBackground: boolean;
   };
 };
 
 export const IntroItem = ({ data }: IntroItemProps) => {
-  const { mainText, subText, imageUrl, buttonText, link, id, hasBackground } = data;
+  const { mainText, subText, imageUrl, id, hasBackground } = data;
 
   return (
     <div
