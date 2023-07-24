@@ -1,13 +1,18 @@
 import Image from 'next/image';
 
-export const SquareLogo = ({ size = 50 }) => {
+type SquareLogoProps = {
+  size?: number;
+  className?: string;
+};
+
+export const SquareLogo = ({ size = 50, className = '' }: SquareLogoProps) => {
   return (
     <Image
       src="/assets/mamoori-favicon.jpg"
       alt="mamoori logo"
       width={size}
       height={size}
-      className="mb-10 rounded-lg"
+      className={`${className} rounded-lg`}
     />
   );
 };
