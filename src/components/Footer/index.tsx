@@ -1,22 +1,17 @@
-import Image from 'next/image';
+import { SquareLogo } from '@/components/SquareLogo';
 
 export const Footer = () => {
   return (
-    <div
-      className="px-28 py-12 text-white"
-      style={{ background: 'linear-gradient(to right, #413C3A, #67615E)' }}
-    >
-      <Image
-        src="/assets/mamoori-favicon.jpg"
-        alt="mamoori logo"
-        width={50}
-        height={50}
-        className="mb-10 rounded-lg"
-      />
-      <p className="my-4 text-lg">
+    <div className="flex flex-col gap-3 bg-gradient-to-r from-brown-200 to-brown-100 p-7 text-white md:px-14  md:py-6 lg:px-28 lg:py-12">
+      <SquareLogo />
+      <p className="my-2 text-base lg:my-4 lg:text-lg">
         Embrace life&apos;s end with grace - our site helps you prepare.
       </p>
-      <p className="text-gray-300">© 2023 Mamoori. All rights reserved.</p>
+      <div className="text-sm text-gray-300 lg:text-base">
+        <p>Mamoori Makers</p>
+        <p>mamoori.info@gmail.com</p>
+      </div>
+      <p className="text-sm text-gray-300">© 2022 Mamoori. All rights reserved.</p>
     </div>
   );
 };
