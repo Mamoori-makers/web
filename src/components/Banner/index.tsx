@@ -22,13 +22,8 @@ export const Banner = ({ bannerData }: BannerProps) => {
   }, []);
 
   return (
-    <div className="relative h-[500px]">
-      <Image
-        src={`/assets/banner/${imageName}`}
-        fill
-        alt="background"
-        style={{ objectFit: 'cover' }}
-      />
+    <div className="relative h-[500px] bg-brown-200">
+      <Image src={`/assets/banner/${imageName}`} fill alt="background" priority />
       <div
         className="absolute bottom-1/2 flex w-full flex-col text-center text-white opacity-50"
         style={{
