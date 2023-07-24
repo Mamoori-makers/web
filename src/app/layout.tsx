@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Mamoori',
     description: '삶의 마무리를 체계적으로 도와주는 서비스, Mamoori.',
-    images: ['/assets/favicon.png'],
+    images: ['/assets/open-graph-image.jpg'],
   },
 };
 
