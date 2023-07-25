@@ -3,11 +3,11 @@
 import classNames from 'classnames';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { UserProfileImage } from '../UserProfileImage';
 
-import { CloseMenuIcon, HamburgerMenuIcon } from './Icons';
+import { ToggleMenuIcon } from './Icons';
 import { MainLogo } from './MainLogo';
 import { useChangeBgByScroll } from './useChangeBgByScroll';
 
@@ -85,6 +85,20 @@ export const GNB = () => {
   const [menuToggle, setMenuToggle] = useState(false);
   const { GNBBackground } = useChangeBgByScroll();
 
+  useEffect(() => {
+    document.addEventListener('click', handleOutsideClick);
+    return () => {
+      document.removeEventListener('click', handleOutsideClick);
+    };
+  }, []);
+
+  const handleOutsideClick = (event: MouseEvent) => {
+    const nav = (event.target as HTMLElement).closest('nav');
+    if (nav === null) {
+      setMenuToggle(false);
+    }
+  };
+
   return (
     <nav
       className="fixed z-10 w-full"
@@ -100,7 +114,7 @@ export const GNB = () => {
         <DefaultMenus />
         <div className="flex items-center sm:hidden">
           <button onClick={() => setMenuToggle(!menuToggle)}>
-            {menuToggle ? <CloseMenuIcon /> : <HamburgerMenuIcon />}
+            <ToggleMenuIcon isOpen={menuToggle} />
           </button>
         </div>
       </div>
