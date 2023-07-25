@@ -1,5 +1,7 @@
 import Image from 'next/image';
 
+import { gradientTextStyle } from '@/constants/classNames/gradientTextStyle';
+
 type IntroItemProps = {
   data: {
     mainText: string;
@@ -10,9 +12,6 @@ type IntroItemProps = {
     hasBackground: boolean;
   };
 };
-
-export const gradientTextStyle =
-  'bg-gradient-to-r from-yellow-800 to-yellow-600 bg-clip-text text-transparent';
 
 export const IntroItem = ({ data }: IntroItemProps) => {
   const { mainText, gradientText, subText, imageName, id, hasBackground } = data;
