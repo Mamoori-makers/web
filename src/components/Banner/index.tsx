@@ -22,7 +22,7 @@ export const Banner = ({ bannerData }: BannerProps) => {
   }, []);
 
   return (
-    <div className="relative  h-[400px] bg-brown-200 lg:h-[500px]">
+    <div className="relative h-[400px] w-full bg-brown-200 lg:h-[500px]">
       <Image src={`/assets/banner/${imageName}`} fill alt="background" priority />
       <div
         className="absolute bottom-1/2 flex w-full flex-col text-center text-white opacity-50"
