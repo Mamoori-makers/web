@@ -2,8 +2,9 @@
 
 import classNames from 'classnames';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
+
+import { useActiveMenu } from '@/hooks/useActiveMenu';
 
 import { UserProfileImage } from '../UserProfileImage';
 
@@ -18,11 +19,7 @@ const GNB_MENU = [
 ];
 
 const DefaultMenus = () => {
-  const pathname = usePathname();
-
-  const isActiveMenu = (link: string) => {
-    return pathname.includes(link) ? true : false;
-  };
+  const { isActiveMenu } = useActiveMenu();
 
   return (
     <div className={`hidden items-center sm:flex`}>
@@ -50,11 +47,7 @@ const DefaultMenus = () => {
 };
 
 const MobileMenus = ({ onClose }: { onClose: () => void }) => {
-  const pathname = usePathname();
-
-  const isActiveMenu = (link: string) => {
-    return pathname.includes(link) ? true : false;
-  };
+  const { isActiveMenu } = useActiveMenu();
 
   return (
     <div className={`flex flex-col items-center`}>
