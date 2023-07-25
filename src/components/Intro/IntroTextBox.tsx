@@ -1,4 +1,4 @@
-import { gradientTextStyle } from './IntroItem';
+import { gradientTextStyle } from '@/constants/classNames/gradientTextStyle';
 
 export const IntroTextBox = () => {
   return (
