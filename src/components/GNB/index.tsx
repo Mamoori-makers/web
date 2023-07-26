@@ -39,7 +39,7 @@ const DefaultMenus = () => {
           </Link>
         );
       })}
-      <Link href="/my-page">
+      <Link href="/login">
         <UserProfileImage />
       </Link>
     </div>
