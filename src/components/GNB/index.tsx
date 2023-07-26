@@ -68,7 +68,7 @@ const MobileMenus = ({ onClose }: { onClose: () => void }) => {
           </Link>
         );
       })}
-      <Link href="/my-page" className="p-3" onClick={onClose}>
+      <Link href="/login" className="p-3" onClick={onClose}>
         <UserProfileImage />
       </Link>
     </div>
