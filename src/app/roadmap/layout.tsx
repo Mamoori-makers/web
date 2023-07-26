@@ -4,6 +4,8 @@ import Link from 'next/link';
 import React from 'react';
 
 import { Banner } from '@/components/Banner';
+import { Footer } from '@/components/Footer';
+import { GNB } from '@/components/GNB';
 import { BANNER_DATA } from '@/constants/bannerData';
 import { useActiveMenu } from '@/hooks/useActiveMenu';
 
@@ -38,10 +40,14 @@ const RoadmapMenu = () => {
 
 export default function RoadmapLayout({ children }: { children: React.ReactNode }) {
   return (
-    <main className="flex flex-col items-center">
-      <Banner bannerData={BANNER_DATA.roadmap} />
-      <RoadmapMenu />
-      <div className="m-6 max-w-4xl lg:m-12">{children}</div>
-    </main>
+    <>
+      <GNB />
+      <main className="flex flex-col items-center">
+        <Banner bannerData={BANNER_DATA.roadmap} />
+        <RoadmapMenu />
+        <div className="m-6 max-w-4xl lg:m-12">{children}</div>
+      </main>
+      <Footer />
+    </>
   );
 }
