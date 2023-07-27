@@ -9,7 +9,7 @@ export default function Roadmap() {
       <p className="my-2 text-sm font-bold text-yellow-700 lg:text-base">
         Empower Your Preparedness with Mamoori
       </p>
-      <div className="mb-3 text-xl font-bold lg:text-2xl">
+      <div className="mb-3 text-xl font-bold sm:text-2xl lg:mb-6 lg:text-3xl">
         <h2>자신감 있는 마무리를 위하여,</h2>
         <h2 className="bg-gradient-to-r from-yellow-800 to-yellow-600 bg-clip-text text-transparent">
           죽음을 대비하는 체계적인 로드맵

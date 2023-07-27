@@ -48,7 +48,7 @@ export default function Checklist() {
   return (
     <div>
       <IconTitle data={ROADMAP_STEPS.step3} />
-      <div className="mt-3 rounded-lg bg-slate-500 p-3 text-white">
+      <div className="mt-6 rounded-lg bg-slate-500 p-3 text-white">
         <p className="mb-3 font-semibold">나의 죽음 준비는 어느 정도일까요?</p>
         <p className="mb-2 text-sm text-gray-200">
           ✓ 마무리가 준비한 체크리스트를 통해 구체적으로 무엇이 준비되었고 무엇이 그렇지 않은지

@@ -14,7 +14,7 @@ type WillGuideItem = {
 
 const WillGuideItem = ({ title, contents }: WillGuideItem) => {
   return (
-    <div className="mb-12 mt-8">
+    <div className="mb-12 mt-6">
       <h2 className="rounded-lg bg-brown-100 p-3 text-xl font-bold text-white">{title}</h2>
       <div className="p-1">
         {contents.map(({ subtitle, description }) => {
