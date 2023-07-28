@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
@@ -10,7 +11,6 @@ import { BANNER_DATA } from '@/constants/bannerData';
 import { useActiveMenu } from '@/hooks/useActiveMenu';
 
 const ROADMAP_MENU = [
-  { name: 'Roadmap Home', link: '/roadmap' },
   { name: 'Handbook', link: '/roadmap/handbook' },
   { name: 'Will', link: '/roadmap/will' },
   { name: 'Checklist', link: '/roadmap/checklist' },
@@ -21,7 +21,10 @@ const RoadmapMenu = () => {
 
   return (
     <div className="mx-auto flex w-full justify-center bg-stone-300 p-3 text-stone-500">
-      <div className="flex w-full max-w-3xl justify-around">
+      <div className="flex w-full max-w-3xl items-center justify-around">
+        <Link href="/roadmap">
+          <Image src="/assets/roadmap/roadmap.png" width={30} height={30} alt="roadmap home" />
+        </Link>
         {ROADMAP_MENU.map(({ name, link }) => {
           const activeStyle = isActiveMenu(link)
             ? 'underline decoration-wavy decoration-yellow-700 underline-offset-4 decoration-2 text-stone-800 font-bold'
