@@ -15,7 +15,7 @@ export const MEMBER_DATA = [
   },
   {
     id: 3,
-    name: 'Eunyoung',
+    name: 'Eunyeong',
     role: '기획 · 디자인 · 앱개발',
     image: '/assets/about/eunyeong.png',
     description: 'Mamoori Gathering Pioneer',
