@@ -1,6 +1,5 @@
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
@@ -9,6 +8,8 @@ import { Footer } from '@/components/Footer';
 import { GNB } from '@/components/GNB';
 import { BANNER_DATA } from '@/constants/bannerData';
 import { useActiveMenu } from '@/hooks/useActiveMenu';
+
+import { RoadmapIcon } from './RoadmapIcon';
 
 const ROADMAP_MENU = [
   { name: 'Handbook', link: '/roadmap/handbook' },
@@ -20,10 +21,16 @@ const RoadmapMenu = () => {
   const { isActiveMenu } = useActiveMenu(true);
 
   return (
-    <div className="mx-auto flex w-full justify-center bg-stone-300 p-3 text-stone-500">
-      <div className="flex w-full max-w-3xl items-center justify-around">
-        <Link href="/roadmap">
-          <Image src="/assets/roadmap/roadmap.png" width={30} height={30} alt="roadmap home" />
+    <div className="mx-auto flex w-full justify-center bg-stone-300 px-3 py-2 text-stone-500">
+      <div className="flex w-full max-w-3xl items-center justify-evenly">
+        <Link
+          href="/roadmap"
+          className="rounded-full p-2"
+          style={{
+            border: isActiveMenu('/roadmap') ? '2px solid #ca8a04' : '2px solid transparent',
+          }}
+        >
+          <RoadmapIcon />
         </Link>
         {ROADMAP_MENU.map(({ name, link }) => {
           const activeStyle = isActiveMenu(link)
@@ -31,7 +38,7 @@ const RoadmapMenu = () => {
             : '';
 
           return (
-            <Link key={name} href={link} className={`${activeStyle}`}>
+            <Link key={name} href={link} className={`${activeStyle} min-w-[60px] p-1 text-center`}>
               {name}
             </Link>
           );
