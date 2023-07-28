@@ -1,6 +1,7 @@
 import { Banner } from '@/components/Banner';
 import { Footer } from '@/components/Footer';
 import { GNB } from '@/components/GNB';
+import { AboutUsIntro } from '@/components/Intro/AboutUsIntro';
 import { BANNER_DATA } from '@/constants/bannerData';
 
 export default function AboutUs() {
@@ -9,6 +10,7 @@ export default function AboutUs() {
       <GNB />
       <main>
         <Banner bannerData={BANNER_DATA.aboutUs} />
+        <AboutUsIntro />
       </main>
       <Footer />
     </>

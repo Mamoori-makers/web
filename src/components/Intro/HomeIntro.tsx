@@ -1,10 +1,10 @@
 import { gradientTextStyle } from '@/constants/classNames/gradientTextStyle';
 
-import { IntroTextBox, IntroTitle, IntroContents } from './IntroTextBox';
+import { IntroBox, IntroTitle, IntroContents } from './IntroTextBox';
 
 export const HomeIntro = () => {
   return (
-    <IntroTextBox>
+    <IntroBox>
       <IntroTitle>
         <span className={`font-extrabold ${gradientTextStyle}`}>마무리</span>는 어떤 서비스인가요?
       </IntroTitle>
@@ -15,7 +15,7 @@ export const HomeIntro = () => {
         </p>
         <p>
           하지만 {''}
-          <span className="font-bold underline decoration-yellow-600 decoration-wavy">
+          <span className="font-bold underline decoration-yellow-600 decoration-wavy decoration-2">
             죽음은 우리 모두가 마주해야 하기 때문에,
           </span>
           <span className="block sm:hidden"></span>
@@ -26,6 +26,6 @@ export const HomeIntro = () => {
           마무리가 준비했어요.
         </p>
       </IntroContents>
-    </IntroTextBox>
+    </IntroBox>
   );
 };

@@ -10,6 +10,6 @@ export const IntroContents = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export const IntroTextBox = ({ children }: { children: React.ReactNode }) => {
+export const IntroBox = ({ children }: { children: React.ReactNode }) => {
   return <div className="mx-8 my-12 flex flex-col items-center">{children}</div>;
 };
