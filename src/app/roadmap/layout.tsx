@@ -19,6 +19,8 @@ const ROADMAP_MENU = [
 
 const RoadmapMenu = () => {
   const { isActiveMenu } = useActiveMenu(true);
+  const isRoadmapPage = isActiveMenu('/roadmap');
+  const roadmapIconColor = isRoadmapPage ? '#fff' : '#000';
 
   return (
     <div className="mx-auto flex w-full justify-center bg-stone-300 px-3 py-2 text-stone-500">
@@ -27,18 +29,20 @@ const RoadmapMenu = () => {
           href="/roadmap"
           className="rounded-lg p-1"
           style={{
-            backgroundColor: isActiveMenu('/roadmap') ? 'rgb(150 102 1 / 50%)' : '',
+            backgroundColor: isRoadmapPage ? '#67615e' : '',
           }}
         >
-          <RoadmapIcon />
+          <RoadmapIcon color={roadmapIconColor} />
         </Link>
         {ROADMAP_MENU.map(({ name, link }) => {
-          const activeStyle = isActiveMenu(link)
-            ? 'underline decoration-wavy decoration-yellow-700 underline-offset-4 decoration-2 text-stone-800 font-bold'
-            : '';
+          const activeStyle = isActiveMenu(link) ? 'font-semibold bg-[#67615e] text-white' : '';
 
           return (
-            <Link key={name} href={link} className={`${activeStyle} min-w-[60px] p-1 text-center`}>
+            <Link
+              key={name}
+              href={link}
+              className={`${activeStyle} min-w-[60px] rounded-lg p-2 text-center`}
+            >
               {name}
             </Link>
           );
