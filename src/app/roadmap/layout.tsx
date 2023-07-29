@@ -55,7 +55,7 @@ export default function RoadmapLayout({ children }: { children: React.ReactNode 
       <main className="flex flex-col items-center">
         <Banner bannerData={BANNER_DATA.roadmap} />
         <RoadmapMenu />
-        <div className="m-6 max-w-4xl lg:m-12">{children}</div>
+        <div className="m-6 w-full max-w-4xl lg:m-12">{children}</div>
       </main>
       <Footer />
     </>
