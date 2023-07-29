@@ -20,7 +20,7 @@ const ROADMAP_MENU = [
 const RoadmapMenu = () => {
   const { isActiveMenu } = useActiveMenu(true);
   const isRoadmapPage = isActiveMenu('/roadmap');
-  const roadmapIconColor = isRoadmapPage ? '#fff' : '#000';
+  const roadmapIconColor = isRoadmapPage ? '#fff' : 'rgb(120 113 108)';
 
   return (
     <div className="mx-auto flex w-full justify-center bg-stone-300 px-3 py-2 text-stone-500">
