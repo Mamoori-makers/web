@@ -4,9 +4,8 @@ import classNames from 'classnames';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
+import { ProfileImage } from '@/components/ProfileImage';
 import { useActiveMenu } from '@/hooks/useActiveMenu';
-
-import { UserProfileImage } from '../UserProfileImage';
 
 import { ToggleMenuIcon } from './Icons';
 import { MainLogo } from './MainLogo';
@@ -17,6 +16,11 @@ const GNB_MENU = [
   { name: 'Roadmap', link: '/roadmap' },
   { name: 'Community', link: '/community' },
 ];
+
+const SAMPLE_USER_DATA = {
+  userName: 'Mamoori',
+  imageUrl: '/assets/Mamoori_profile.png',
+};
 
 const DefaultMenus = () => {
   const { isActiveMenu } = useActiveMenu();
@@ -40,7 +44,7 @@ const DefaultMenus = () => {
         );
       })}
       <Link href="/login">
-        <UserProfileImage />
+        <ProfileImage imageSrc={SAMPLE_USER_DATA.imageUrl} alt={SAMPLE_USER_DATA.userName} />
       </Link>
     </div>
   );
@@ -69,7 +73,7 @@ const MobileMenus = ({ onClose }: { onClose: () => void }) => {
         );
       })}
       <Link href="/login" className="p-3" onClick={onClose}>
-        <UserProfileImage />
+        <ProfileImage imageSrc={SAMPLE_USER_DATA.imageUrl} alt={SAMPLE_USER_DATA.userName} />
       </Link>
     </div>
   );
