@@ -7,7 +7,7 @@ export default async function Handbook() {
   const allPosts = await getAllPublishedPosts();
 
   return (
-    <div>
+    <div className="roadmap-container">
       <IconTitle data={ROADMAP_STEPS.step1} />
       <div className="my-5 flex flex-col gap-5 lg:my-8 lg:flex-row">
         {allPosts?.map((post) => (

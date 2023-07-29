@@ -5,7 +5,7 @@ import { ROADMAP_CONTENTS } from '@/constants/roadmapData';
 
 export default function Roadmap() {
   return (
-    <div>
+    <div className="roadmap-container">
       <p className="my-2 text-sm font-bold text-yellow-700 lg:text-base">
         Empower Your Preparedness with Mamoori
       </p>

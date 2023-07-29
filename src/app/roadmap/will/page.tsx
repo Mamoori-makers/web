@@ -32,7 +32,7 @@ const WillGuideItem = ({ title, contents }: WillGuideItem) => {
 
 export default function Will() {
   return (
-    <div>
+    <div className="roadmap-container">
       <IconTitle data={ROADMAP_STEPS.step2} />
       {WILL_GUIDE.map(({ title, contents }) => (
         <WillGuideItem key={title} title={title} contents={contents} />
