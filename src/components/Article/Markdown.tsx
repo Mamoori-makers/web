@@ -3,7 +3,7 @@ import slug from 'remark-slug';
 
 export const Markdown = ({ markdownString }: { markdownString: string }) => {
   return (
-    <ReactMarkdown className="markdown" remarkPlugins={[slug]}>
+    <ReactMarkdown className="markdown px-5" remarkPlugins={[slug]}>
       {markdownString}
     </ReactMarkdown>
   );
