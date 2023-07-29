@@ -15,7 +15,7 @@ export const Article = ({ postMarkdown }: ArticleProps) => {
   } = postMarkdown;
 
   return (
-    <article className="mt-5">
+    <article>
       <ArticleHeader metadata={metadata} />
       <ArticleMain markdown={markdownString} />
     </article>
