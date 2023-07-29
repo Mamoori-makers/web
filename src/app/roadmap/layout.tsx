@@ -25,9 +25,9 @@ const RoadmapMenu = () => {
       <div className="flex w-full max-w-3xl items-center justify-evenly">
         <Link
           href="/roadmap"
-          className="rounded-full p-2"
+          className="rounded-lg p-1"
           style={{
-            border: isActiveMenu('/roadmap') ? '2px solid #ca8a04' : '2px solid transparent',
+            backgroundColor: isActiveMenu('/roadmap') ? 'rgb(150 102 1 / 50%)' : '',
           }}
         >
           <RoadmapIcon />
