@@ -1,19 +1,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import type { Post } from '@/lib/notion/types';
+import { Tags } from '@/components/Tags';
 
-const TAG_COLOR = {
-  red: '#E03D3Eb3',
-  orange: '#D9730Bb3',
-  yellow: '#DFAB00b3',
-  green: '#0E7B6Cb3',
-  blue: '#0C6E99b3',
-  pink: '#AD1972b3',
-  brown: '#64473Ab3',
-  purple: '#693FA5b3',
-  gray: '#878682b3',
-};
+import type { Post } from '@/lib/notion/types';
 
 export const PostCard = ({ data }: { data: Post }) => {
   const { title, summary, thumbnailImg, slug, tags, date } = data;
@@ -31,17 +21,7 @@ export const PostCard = ({ data }: { data: Post }) => {
           />
         </div>
         <div className="flex h-[200px] flex-col p-5">
-          <div className="">
-            {tags.map(({ id, name, color }) => (
-              <span
-                key={id}
-                className="mr-1 inline-block rounded-3xl px-3 py-[2px] text-xs font-extralight tracking-widest text-white"
-                style={{ backgroundColor: TAG_COLOR[color] }}
-              >
-                #{name}
-              </span>
-            ))}
-          </div>
+          <Tags tags={tags} />
           <div className="flex h-full flex-col justify-between">
             <div>
               <h2 className="my-2 line-clamp-2 text-lg font-bold">{title}</h2>

@@ -1,3 +1,5 @@
+import type { MdBlock, MdStringObject } from 'notion-to-md/build/types';
+
 export type Tag = {
   id: string;
   name: string;
@@ -12,4 +14,10 @@ export type Post = {
   slug: string;
   tags: Tag[];
   date: string;
+};
+
+export type PostMarkdown = {
+  metadata: Post;
+  markdown: MdStringObject;
+  headings: MdBlock[];
 };
