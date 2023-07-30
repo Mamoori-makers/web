@@ -1,3 +1,4 @@
+import { CopyLinkButton } from '@/components/CopyLinkButton';
 import { PostMarkdown } from '@/lib/notion/types';
 
 import { ArticleHeader } from './ArticleHeader';
@@ -18,6 +19,9 @@ export const Article = ({ postMarkdown }: ArticleProps) => {
     <article>
       <ArticleHeader metadata={metadata} />
       <ArticleMain markdown={markdownString} />
+      <div className="flex justify-center px-5">
+        <CopyLinkButton />
+      </div>
     </article>
   );
 };
