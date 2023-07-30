@@ -11,22 +11,29 @@ import { useActiveMenu } from '@/hooks/useActiveMenu';
 
 import { RoadmapIcon } from './RoadmapIcon';
 
+const ROADMAP_PATH = {
+  index: '/roadmap',
+  handbook: '/roadmap/handbook',
+  will: '/roadmap/will',
+  checklist: '/roadmap/checklist',
+};
+
 const ROADMAP_MENU = [
-  { name: 'Handbook', link: '/roadmap/handbook' },
-  { name: 'Will', link: '/roadmap/will' },
-  { name: 'Checklist', link: '/roadmap/checklist' },
+  { name: 'Handbook', link: ROADMAP_PATH.handbook },
+  { name: 'Will', link: ROADMAP_PATH.will },
+  { name: 'Checklist', link: ROADMAP_PATH.checklist },
 ];
 
 const RoadmapMenu = () => {
-  const { isActiveMenu } = useActiveMenu(true);
-  const isRoadmapPage = isActiveMenu('/roadmap');
+  const { isActiveMenu, isActiveMenuExact } = useActiveMenu();
+  const isRoadmapPage = isActiveMenuExact(ROADMAP_PATH.index);
   const roadmapIconColor = isRoadmapPage ? '#fff' : 'rgb(120 113 108)';
 
   return (
     <div className="mx-auto flex w-full justify-center bg-stone-300 px-3 py-2 text-stone-500">
       <div className="flex w-full max-w-3xl items-center justify-evenly">
         <Link
-          href="/roadmap"
+          href={ROADMAP_PATH.index}
           className="rounded-lg p-1"
           style={{
             backgroundColor: isRoadmapPage ? '#67615e' : '',

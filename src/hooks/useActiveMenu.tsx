@@ -2,15 +2,16 @@
 
 import { usePathname } from 'next/navigation';
 
-export const useActiveMenu = (exact = false) => {
+export const useActiveMenu = () => {
   const pathname = usePathname();
 
   const isActiveMenu = (link: string) => {
-    if (exact) {
-      return pathname === link;
-    }
     return pathname.includes(link) ? true : false;
   };
 
-  return { isActiveMenu };
+  const isActiveMenuExact = (link: string) => {
+    return pathname === link;
+  };
+
+  return { isActiveMenu, isActiveMenuExact };
 };
