@@ -9,7 +9,7 @@ export const PostCard = ({ data }: { data: Post }) => {
   const { title, summary, thumbnailImg, slug, tags, date } = data;
 
   return (
-    <li className="mx-auto h-[400px] w-[300px] list-none rounded-lg shadow-lg">
+    <li className="mx-auto h-[400px] w-[270px] min-w-[270px] list-none rounded-lg shadow-lg">
       <Link href={`/roadmap/handbook/${slug}`} className="block h-full">
         <div className="relative h-[200px]">
           <Image

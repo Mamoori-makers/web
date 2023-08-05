@@ -9,7 +9,7 @@ export default async function Handbook() {
   return (
     <div className="roadmap-container">
       <IconTitle data={ROADMAP_STEPS.step1} />
-      <div className="my-5 flex flex-col gap-5 lg:my-8 lg:flex-row">
+      <div className="my-5 flex flex-col flex-wrap gap-5 sm:flex-row lg:my-8">
         {allPosts?.map((post) => (
           <PostCard key={post.id} data={post} />
         ))}
