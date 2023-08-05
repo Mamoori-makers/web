@@ -4,7 +4,7 @@
 
 @layer utilities {
   .markdown {
-    @apply prose prose-stone;
+    @apply prose prose-stone max-w-none;
   }
 
   .roadmap-container {
