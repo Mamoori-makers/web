@@ -1,5 +1,5 @@
 import { Article } from '@/components/Article';
-import { getPostMarkdown } from '@/lib/notion';
+import { getPostMarkdown } from '@/libs/notion';
 
 export default async function HandbookPost({ params }: { params: { slug: string } }) {
   const { slug } = params;

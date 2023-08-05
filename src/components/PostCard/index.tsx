@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 import { Tags } from '@/components/Tags';
 
-import type { Post } from '@/lib/notion/types';
+import type { Post } from '@/libs/notion/types';
 
 export const PostCard = ({ data }: { data: Post }) => {
   const { title, summary, thumbnailImg, slug, tags, date } = data;

@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 import { ProfileImage } from '@/components/ProfileImage';
 import { Tags } from '@/components/Tags';
-import { Post } from '@/lib/notion/types';
+import { Post } from '@/libs/notion/types';
 
 export const ArticleHeader = ({ metadata }: { metadata: Post }) => {
   const { title, summary, thumbnailImg, tags, date } = metadata;

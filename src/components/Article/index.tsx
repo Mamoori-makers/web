@@ -1,5 +1,5 @@
 import { CopyLinkButton } from '@/components/CopyLinkButton';
-import { PostMarkdown } from '@/lib/notion/types';
+import { PostMarkdown } from '@/libs/notion/types';
 
 import { ArticleHeader } from './ArticleHeader';
 import { ArticleMain } from './ArticleMain';

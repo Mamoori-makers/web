@@ -1,4 +1,4 @@
-import { Tag } from '@/lib/notion/types';
+import { Tag } from '@/libs/notion/types';
 
 const TAG_COLOR = {
   red: '#E03D3Eb3',
