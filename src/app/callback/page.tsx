@@ -5,17 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
 import { loginStateAtom } from '@/stores/atoms/loginStateAtom';
-
-const getCookie = (name: string) => {
-  const cookies = document.cookie.split('; ');
-  for (let i = 0; i < cookies.length; i++) {
-    const cookie = cookies[i].split('=');
-    if (cookie[0] === name) {
-      return cookie[1];
-    }
-  }
-  return null;
-};
+import { getCookie } from '@/utils/cookie';
 
 const ACCESS_TOKEN_COOKIE_KEY = 'Authorization';
 
