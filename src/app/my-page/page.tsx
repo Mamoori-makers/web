@@ -1,6 +1,6 @@
 'use client';
 
-import { useAtomValue } from 'jotai';
+import { useAtom, useSetAtom } from 'jotai';
 import Image from 'next/image';
 import { redirect } from 'next/navigation';
 
@@ -8,12 +8,14 @@ import { Footer } from '@/components/Footer';
 import { GNB } from '@/components/GNB';
 import { ProfileImage } from '@/components/ProfileImage';
 import { UserData } from '@/libs/react-query/useUserData';
+import { accessTokenAtom } from '@/stores/atoms/accessTokenAtom';
 import { loginStateAtom } from '@/stores/atoms/loginStateAtom';
 import { userDataAtom } from '@/stores/atoms/userDataAtom';
 
 export default function MyPage() {
-  const isLoggedIn = useAtomValue(loginStateAtom) as boolean;
-  const userData = useAtomValue(userDataAtom) as UserData | null;
+  const [isLoggedIn, setIsLoggedIn] = useAtom(loginStateAtom);
+  const [userData, setUserData] = useAtom(userDataAtom);
+  const setAccessToken = useSetAtom(accessTokenAtom);
 
   if (!isLoggedIn) {
     redirect('/login');
@@ -24,7 +26,18 @@ export default function MyPage() {
     redirect('/login');
   }
 
-  const { image, name, email } = userData;
+  const { image, name, email } = userData as UserData;
+
+  const handleLogoutButtonClick = () => {
+    if (!window.confirm('정말 로그아웃 하시겠습니까?')) {
+      return;
+    }
+
+    setIsLoggedIn(false);
+    setUserData(null);
+    setAccessToken('');
+    redirect('/');
+  };
 
   return (
     <>
@@ -47,6 +60,12 @@ export default function MyPage() {
             <p className="text-sm">{email}</p>
           </div>
         </div>
+        <button
+          className="m-3 w-[80%] rounded-md bg-yellow-500 p-2 text-center text-sm hover:opacity-75 sm:max-w-[350px]"
+          onClick={handleLogoutButtonClick}
+        >
+          Logout
+        </button>
       </main>
       <Footer />
     </>
