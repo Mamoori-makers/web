@@ -13,44 +13,46 @@ import { loginStateAtom } from '@/stores/atoms/loginStateAtom';
 import { userDataAtom } from '@/stores/atoms/userDataAtom';
 
 export default function MyPage() {
-  const [isLogin, setIsLogin] = useAtom(loginStateAtom);
+  const [isLoggedIn, setIsLoggedIn] = useAtom(loginStateAtom);
   const setUserData = useSetAtom(userDataAtom);
   const accessToken = useAtomValue(accessTokenAtom);
 
-  if (!isLogin) {
+  if (!isLoggedIn) {
     redirect('/login');
   }
 
   const { data: userData, isSuccess } = useUserData(accessToken);
 
-  if (isSuccess) {
+  if (isSuccess && userData) {
     setUserData(userData);
-    setIsLogin(true);
-  }
+    setIsLoggedIn(true);
 
-  return (
-    <>
-      <GNB />
-      <main className="flex flex-col items-center">
-        <div className="relative flex h-[400px] w-full items-center justify-center bg-brown-200">
-          <Image
-            src="/assets/banner/my.jpeg"
-            fill
-            priority
-            alt="background"
-            style={{ objectFit: 'cover' }}
-          />
-          <div
-            className="flex h-fit w-[300px] flex-col items-center justify-center gap-2 rounded-lg bg-[#473d3d5c] p-5 text-white"
-            style={{ zIndex: 1 }}
-          >
-            <ProfileImage imageSrc={userData?.image} alt="profile" size={100} />
-            <p className="font-bold">{userData?.name}</p>
-            <p className="text-sm">{userData?.email}</p>
+    const { image, name, email } = userData;
+
+    return (
+      <>
+        <GNB />
+        <main className="flex flex-col items-center">
+          <div className="relative flex h-[400px] w-full items-center justify-center bg-brown-200">
+            <Image
+              src="/assets/banner/my.jpeg"
+              fill
+              priority
+              alt="background"
+              style={{ objectFit: 'cover' }}
+            />
+            <div
+              className="flex h-fit w-[300px] flex-col items-center justify-center gap-2 rounded-lg bg-[#473d3d5c] p-5 text-white"
+              style={{ zIndex: 1 }}
+            >
+              <ProfileImage imageSrc={image} alt="profile" size={100} />
+              <p className="font-bold">{name}</p>
+              <p className="text-sm">{email}</p>
+            </div>
           </div>
-        </div>
-      </main>
-      <Footer />
-    </>
-  );
+        </main>
+        <Footer />
+      </>
+    );
+  }
 }
