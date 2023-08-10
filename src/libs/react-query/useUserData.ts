@@ -1,15 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
-import { useAtomValue } from 'jotai';
 
 import { API_PATH } from '@/constants/apiPath';
 import { getAuthRequest } from '@/libs/axios/useAuthApi';
-import { accessTokenAtom } from '@/stores/atoms/accessTokenAtom';
 
 import { QUERY_KEY } from './queryKey';
 
-export const useUserData = () => {
-  const accessToken = useAtomValue(accessTokenAtom);
-
+export const useUserData = (accessToken: string) => {
   return useQuery({
     queryKey: [QUERY_KEY.user, accessToken],
     queryFn: () => getAuthRequest(API_PATH.user, accessToken),
