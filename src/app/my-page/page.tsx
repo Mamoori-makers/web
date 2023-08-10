@@ -26,9 +26,6 @@ export default function MyPage() {
   if (isSuccess) {
     setUserData(userData);
     setIsLogin(true);
-    console.log(userData);
-  } else {
-    console.log('Error');
   }
 
   return (
@@ -45,6 +42,7 @@ export default function MyPage() {
           />
           <div className="flex flex-col items-center justify-center" style={{ zIndex: 1 }}>
             <ProfileImage imageSrc={userData?.image} alt="profile" size={100} />
+            <p className="my-3 text-white">{userData?.name}</p>
             <p className="my-3 text-white">{userData?.email}</p>
           </div>
         </div>
