@@ -2,6 +2,8 @@ import './globals.css';
 import { Inter } from 'next/font/google';
 import Script from 'next/script';
 
+import Providers from '@/libs/react-query/providers';
+
 import type { Metadata } from 'next';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -42,7 +44,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           gtag('config', ${gaTrackingId});
         `}
       </Script>
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 }
