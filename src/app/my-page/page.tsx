@@ -21,12 +21,9 @@ export default function MyPage() {
 
   const { data: userData, isSuccess } = useUserData();
 
-  if (!isSuccess) {
-    alert('로그인에 실패했습니다. 다시 시도해주세요.');
-    redirect('/login');
+  if (isSuccess) {
+    setUserData(userData);
   }
-
-  setUserData(userData);
 
   return (
     <>
