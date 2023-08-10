@@ -1,6 +1,6 @@
 'use client';
 
-import { useAtomValue } from 'jotai';
+import { useAtomValue, useSetAtom } from 'jotai';
 import Image from 'next/image';
 import { redirect } from 'next/navigation';
 
@@ -8,26 +8,31 @@ import { Footer } from '@/components/Footer';
 import { GNB } from '@/components/GNB';
 import { ProfileImage } from '@/components/ProfileImage';
 import { useUserData } from '@/libs/react-query/useUserData';
-import { accessTokenAtom } from '@/stores/atoms/accessTokenAtom';
+import { loginStateAtom } from '@/stores/atoms/loginStateAtom';
+import { userDataAtom } from '@/stores/atoms/userDataAtom';
 
 export default function MyPage() {
-  const accessToken = useAtomValue(accessTokenAtom);
+  const isLogin = useAtomValue(loginStateAtom);
+  const setUserData = useSetAtom(userDataAtom);
 
-  if (!accessToken) {
+  if (!isLogin) {
     redirect('/login');
   }
 
   const { data: userData, isSuccess } = useUserData();
 
-  if (isSuccess) {
-    console.log(userData);
+  if (!isSuccess) {
+    alert('로그인에 실패했습니다. 다시 시도해주세요.');
+    redirect('/login');
   }
+
+  setUserData(userData);
 
   return (
     <>
       <GNB />
       <main className="flex flex-col items-center">
-        <div className="relative flex h-[400px] w-full justify-center">
+        <div className="relative flex h-[400px] w-full justify-center bg-brown-200">
           <Image
             src="/assets/banner/my.jpeg"
             fill
@@ -36,8 +41,8 @@ export default function MyPage() {
             style={{ objectFit: 'cover' }}
           />
           <div className="flex flex-col items-center justify-center" style={{ zIndex: 1 }}>
-            <ProfileImage imageSrc="/assets/mamoori_profile.png" alt="profile" size={100} />
-            <p className="my-3 text-white">Email</p>
+            <ProfileImage imageSrc={userData.image} alt="profile" size={100} />
+            <p className="my-3 text-white">{userData.email}</p>
           </div>
         </div>
       </main>
