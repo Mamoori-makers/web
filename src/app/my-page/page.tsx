@@ -12,7 +12,7 @@ import { loginStateAtom } from '@/stores/atoms/loginStateAtom';
 import { userDataAtom } from '@/stores/atoms/userDataAtom';
 
 export default function MyPage() {
-  const isLoggedIn = useAtomValue(loginStateAtom);
+  const isLoggedIn = useAtomValue(loginStateAtom) as boolean;
   const userData = useAtomValue(userDataAtom) as UserData | null;
 
   if (!isLoggedIn) {
