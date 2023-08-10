@@ -11,7 +11,7 @@ type Options = {
 const isDevMode = process.env.NODE_ENV === 'development';
 
 const axiosInstance = axios.create({
-  baseURL: process.env.ENDPOINT,
+  baseURL: 'https://api.mamoori.life',
   timeout: 10000,
   headers: { 'Content-Type': 'application/json' },
 });
