@@ -32,7 +32,7 @@ export default function MyPage() {
     <>
       <GNB />
       <main className="flex flex-col items-center">
-        <div className="relative flex h-[400px] w-full justify-center bg-brown-200">
+        <div className="relative flex h-[400px] w-full items-center justify-center bg-brown-200">
           <Image
             src="/assets/banner/my.jpeg"
             fill
@@ -40,10 +40,13 @@ export default function MyPage() {
             alt="background"
             style={{ objectFit: 'cover' }}
           />
-          <div className="flex flex-col items-center justify-center" style={{ zIndex: 1 }}>
+          <div
+            className="flex h-fit w-[300px] flex-col items-center justify-center gap-2 rounded-lg bg-[#473d3d5c] p-5 text-white"
+            style={{ zIndex: 1 }}
+          >
             <ProfileImage imageSrc={userData?.image} alt="profile" size={100} />
-            <p className="my-3 text-white">{userData?.name}</p>
-            <p className="my-3 text-white">{userData?.email}</p>
+            <p className="font-bold">{userData?.name}</p>
+            <p className="text-sm">{userData?.email}</p>
           </div>
         </div>
       </main>
