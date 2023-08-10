@@ -8,6 +8,7 @@ export type UserData = {
   userId: number;
   email: string;
   name: string;
+  image: string;
 };
 
 export const userDataAtom = atomWithStorage('userData', null, storage);
