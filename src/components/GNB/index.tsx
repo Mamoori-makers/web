@@ -21,7 +21,7 @@ const GNB_MENU = [
 
 const SAMPLE_USER_DATA = {
   userName: 'Mamoori',
-  imageUrl: '/assets/Mamoori_profile.png',
+  imageUrl: '/assets/mamoori-default-profile.png',
 };
 
 const DefaultMenus = ({ isLogin }: { isLogin: boolean }) => {
