@@ -3,6 +3,7 @@
 import { useAtom, useSetAtom } from 'jotai';
 import Image from 'next/image';
 import { redirect } from 'next/navigation';
+import { useEffect } from 'react';
 
 import { Footer } from '@/components/Footer';
 import { GNB } from '@/components/GNB';
@@ -22,6 +23,12 @@ export default function MyPage() {
     redirect('/login');
   }
 
+  useEffect(() => {
+    if (userData) {
+      setUserData(userData);
+    }
+  }, [userData, setUserData]);
+
   if (!isFetched) {
     return <></>;
   }
@@ -30,8 +37,6 @@ export default function MyPage() {
     alert('데이터를 불러오지 못했습니다. 다시 로그인 해 주세요.');
     redirect('/login');
   }
-
-  const { image, name, email } = userData;
 
   // TODO: api/token - refresh token 삭제
   const handleLogoutButtonClick = () => {
@@ -61,9 +66,9 @@ export default function MyPage() {
             className="flex h-fit w-[300px] flex-col items-center justify-center gap-2 rounded-lg bg-[#473d3d5c] p-5 text-white"
             style={{ zIndex: 1 }}
           >
-            <ProfileImage imageSrc={image} alt="profile" size={100} />
-            <p className="font-bold">{name}</p>
-            <p className="text-sm">{email}</p>
+            <ProfileImage imageSrc={userData?.image} alt="profile" size={100} />
+            <p className="font-bold">{userData?.name}</p>
+            <p className="text-sm">{userData?.email}</p>
           </div>
         </div>
         <button
