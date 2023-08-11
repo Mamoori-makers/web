@@ -17,7 +17,7 @@ export default function MyPage() {
   const [isLoggedIn, setIsLoggedIn] = useAtom(loginStateAtom);
   const setUserData = useSetAtom(userDataAtom);
   const [accessToken, setAccessToken] = useAtom(accessTokenAtom);
-  const { data: userData, isFetched } = useUserData(accessToken);
+  const { data: userData } = useUserData(accessToken);
 
   if (!isLoggedIn) {
     redirect('/login');
@@ -28,10 +28,6 @@ export default function MyPage() {
       setUserData(userData);
     }
   }, [userData, setUserData]);
-
-  if (!isFetched) {
-    return <></>;
-  }
 
   if (!userData) {
     alert('데이터를 불러오지 못했습니다. 다시 로그인 해 주세요.');
