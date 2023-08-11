@@ -7,18 +7,23 @@ import { redirect } from 'next/navigation';
 import { Footer } from '@/components/Footer';
 import { GNB } from '@/components/GNB';
 import { ProfileImage } from '@/components/ProfileImage';
-import { UserData } from '@/libs/react-query/useUserData';
+import { useUserData } from '@/libs/react-query/useUserData';
 import { accessTokenAtom } from '@/stores/atoms/accessTokenAtom';
 import { loginStateAtom } from '@/stores/atoms/loginStateAtom';
 import { userDataAtom } from '@/stores/atoms/userDataAtom';
 
 export default function MyPage() {
   const [isLoggedIn, setIsLoggedIn] = useAtom(loginStateAtom);
-  const [userData, setUserData] = useAtom(userDataAtom);
-  const setAccessToken = useSetAtom(accessTokenAtom);
+  const setUserData = useSetAtom(userDataAtom);
+  const [accessToken, setAccessToken] = useAtom(accessTokenAtom);
+  const { data: userData, isSuccess } = useUserData(accessToken);
 
   if (!isLoggedIn) {
     redirect('/login');
+  }
+
+  if (!isSuccess) {
+    return <></>;
   }
 
   if (!userData) {
@@ -26,7 +31,7 @@ export default function MyPage() {
     redirect('/login');
   }
 
-  const { image, name, email } = userData as UserData;
+  const { image, name, email } = userData;
 
   const handleLogoutButtonClick = () => {
     if (!window.confirm('정말 로그아웃 하시겠습니까?')) {
