@@ -16,13 +16,13 @@ export default function MyPage() {
   const [isLoggedIn, setIsLoggedIn] = useAtom(loginStateAtom);
   const setUserData = useSetAtom(userDataAtom);
   const [accessToken, setAccessToken] = useAtom(accessTokenAtom);
-  const { data: userData, isSuccess } = useUserData(accessToken);
+  const { data: userData, isFetched } = useUserData(accessToken);
 
   if (!isLoggedIn) {
     redirect('/login');
   }
 
-  if (!isSuccess) {
+  if (!isFetched) {
     return <></>;
   }
 
@@ -33,6 +33,7 @@ export default function MyPage() {
 
   const { image, name, email } = userData;
 
+  // TODO: api/token - refresh token 삭제
   const handleLogoutButtonClick = () => {
     if (!window.confirm('정말 로그아웃 하시겠습니까?')) {
       return;
