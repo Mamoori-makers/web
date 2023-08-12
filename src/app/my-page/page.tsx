@@ -9,7 +9,7 @@ import { GNB } from '@/components/GNB';
 import { ProfileImage } from '@/components/ProfileImage';
 import { API_PATH } from '@/constants/paths/apiPath';
 import { ROUTE_PATH } from '@/constants/paths/routePath';
-import { deleteAuthRequest } from '@/libs/axios/useAuthApi';
+import { deleteAuthRequest } from '@/libs/axios/authRequest';
 import { UserData } from '@/libs/react-query/useUserData';
 import { accessTokenAtom } from '@/stores/atoms/accessTokenAtom';
 import { loginStateAtom } from '@/stores/atoms/loginStateAtom';
