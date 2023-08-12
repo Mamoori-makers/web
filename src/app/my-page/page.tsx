@@ -3,31 +3,30 @@
 import { useAtom, useSetAtom } from 'jotai';
 import Image from 'next/image';
 import { redirect } from 'next/navigation';
-import { useEffect } from 'react';
 
 import { Footer } from '@/components/Footer';
 import { GNB } from '@/components/GNB';
 import { ProfileImage } from '@/components/ProfileImage';
-import { useUserData } from '@/libs/react-query/useUserData';
+import { UserData } from '@/libs/react-query/useUserData';
 import { accessTokenAtom } from '@/stores/atoms/accessTokenAtom';
 import { loginStateAtom } from '@/stores/atoms/loginStateAtom';
 import { userDataAtom } from '@/stores/atoms/userDataAtom';
 
 export default function MyPage() {
   const [isLoggedIn, setIsLoggedIn] = useAtom(loginStateAtom);
-  const setUserData = useSetAtom(userDataAtom);
-  const [accessToken, setAccessToken] = useAtom(accessTokenAtom);
-  const { data: userData } = useUserData(accessToken);
+  const [userData, setUserData] = useAtom(userDataAtom);
+  const setAccessToken = useSetAtom(accessTokenAtom);
 
   if (!isLoggedIn) {
     redirect('/login');
   }
 
-  useEffect(() => {
-    if (userData) {
-      setUserData(userData);
-    }
-  }, [userData, setUserData]);
+  if (!userData) {
+    alert('데이터를 불러오지 못했습니다. 다시 로그인 해 주세요.');
+    redirect('/login');
+  }
+
+  const { image, name, email } = userData as UserData;
 
   // TODO: api/token - refresh token 삭제
   const handleLogoutButtonClick = () => {
@@ -57,9 +56,9 @@ export default function MyPage() {
             className="flex h-fit w-[300px] flex-col items-center justify-center gap-2 rounded-lg bg-[#473d3d5c] p-5 text-white"
             style={{ zIndex: 1 }}
           >
-            <ProfileImage imageSrc={userData?.image || ''} alt="profile" size={100} />
-            <p className="font-bold">{userData?.name}</p>
-            <p className="text-sm">{userData?.email}</p>
+            <ProfileImage imageSrc={image || ''} alt="profile" size={100} />
+            <p className="font-bold">{name}</p>
+            <p className="text-sm">{email}</p>
           </div>
         </div>
         <button
