@@ -27,9 +27,6 @@ export default function Callback() {
       setUserData(userData);
       setLoginState(true);
       redirect('/my-page');
-    } else {
-      alert('로그인에 실패했습니다. 다시 시도해 주세요.');
-      redirect('/login');
     }
   }, [isSuccess, userData, accessToken, setAccessToken, setLoginState, setUserData]);
 
