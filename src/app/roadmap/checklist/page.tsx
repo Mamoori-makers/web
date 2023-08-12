@@ -5,10 +5,11 @@ import { useRouter } from 'next/navigation';
 import { Dispatch, SetStateAction, useState } from 'react';
 
 import { IconTitle } from '@/components/IconTitle';
-import { CHECKLIST } from '@/constants/checklistData';
 import { ROADMAP_STEPS } from '@/constants/roadmapData';
+import { useChecklistTask } from '@/libs/react-query/useChecklist';
 
 import { CheckIcon } from './checkIcon';
+import { ChecklistSkeleton } from './ChecklistSkeleton';
 
 type CheckItemProps = {
   content: string;
@@ -42,7 +43,9 @@ const CheckItem = ({ content, setCheckCount, id }: CheckItemProps) => {
 export default function Checklist() {
   const [checkCount, setCheckCount] = useState(0);
   const router = useRouter();
+  const { data: checklistTasks, isSuccess } = useChecklistTask();
 
+  // TODO: implement checklist save feature
   const handleSaveResultClick = () => {
     router.push('/login');
   };
@@ -61,19 +64,25 @@ export default function Checklist() {
           체크할 수도 있어요.
         </p>
       </div>
-      <div className="p-3 text-end text-sm text-brown-200">{`${checkCount} / ${CHECKLIST.length}`}</div>
-      <div className="mb-5">
-        {CHECKLIST.map(({ id, content }) => {
-          return (
-            <CheckItem
-              key={id}
-              content={content}
-              setCheckCount={setCheckCount}
-              id={id.toString()}
-            />
-          );
-        })}
-      </div>
+      {isSuccess && checklistTasks ? (
+        <>
+          <div className="p-3 text-end text-sm text-brown-200">{`${checkCount} / ${checklistTasks.length}`}</div>
+          <div className="mb-5">
+            {checklistTasks.map(({ id, task }) => {
+              return (
+                <CheckItem
+                  key={id}
+                  content={task}
+                  setCheckCount={setCheckCount}
+                  id={id.toString()}
+                />
+              );
+            })}
+          </div>
+        </>
+      ) : (
+        <ChecklistSkeleton />
+      )}
       <div className="flex flex-col items-center">
         <button
           className="my-1 w-full rounded-lg bg-brown-100 p-2 text-white shadow-md shadow-stone-500/50 sm:w-96"
