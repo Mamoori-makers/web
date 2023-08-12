@@ -1,6 +1,6 @@
 import axios, { RawAxiosRequestHeaders, AxiosHeaders } from 'axios';
 
-import { ApiPathType } from '@/constants/apiPath';
+import { ApiPathType } from '@/constants/paths/apiPath';
 
 type Options = {
   headers?: RawAxiosRequestHeaders | AxiosHeaders;
@@ -16,6 +16,7 @@ const axiosInstance = axios.create({
   headers: { 'Content-Type': 'application/json' },
 });
 
+// TODO: Error handling - 구체적인 에러 처리 로직 구현
 export const getAuthRequest = async (
   apiPath: ApiPathType,
   accessToken: string,
@@ -54,6 +55,43 @@ export const postAuthRequest = async <T>(apiPath: string, payload: T, accessToke
     });
 
     return data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const putAuthRequest = async <T>(apiPath: string, payload: T, accessToken: string) => {
+  try {
+    if (isDevMode) {
+      const { data } = await axios.put(apiPath, payload);
+      return data;
+    }
+
+    const { data } = await axiosInstance.put(apiPath, payload, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const deleteAuthRequest = async (apiPath: string, accessToken: string) => {
+  try {
+    if (isDevMode) {
+      await axios.delete(apiPath);
+      return true;
+    }
+
+    await axiosInstance.delete(apiPath, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    return true;
   } catch (error) {
     console.error(error);
   }
