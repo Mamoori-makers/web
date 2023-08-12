@@ -1,6 +1,6 @@
 import { UseQueryResult, useQuery } from '@tanstack/react-query';
 
-import { API_PATH } from '@/constants/apiPath';
+import { API_PATH } from '@/constants/paths/apiPath';
 import { getAuthRequest } from '@/libs/axios/useAuthApi';
 
 import { QUERY_KEY } from './queryKey';
