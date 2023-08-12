@@ -1,6 +1,6 @@
 import { IconTitle } from '@/components/IconTitle';
 import { PostCard } from '@/components/PostCard';
-import { ROADMAP_STEPS } from '@/constants/roadmapData';
+import { ROADMAP_STEPS } from '@/constants/textData/roadmapData';
 import { getAllPublishedPosts } from '@/libs/notion';
 
 export default async function Handbook() {

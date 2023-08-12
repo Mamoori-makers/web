@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { Dispatch, SetStateAction, useState } from 'react';
 
 import { IconTitle } from '@/components/IconTitle';
-import { ROADMAP_STEPS } from '@/constants/roadmapData';
+import { ROADMAP_STEPS } from '@/constants/textData/roadmapData';
 import { useChecklistTask } from '@/libs/react-query/useChecklist';
 
 import { CheckIcon } from './checkIcon';

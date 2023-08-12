@@ -2,7 +2,7 @@ import { Banner } from '@/components/Banner';
 import { ComingSoon } from '@/components/ComingSoon';
 import { Footer } from '@/components/Footer';
 import { GNB } from '@/components/GNB';
-import { BANNER_DATA } from '@/constants/bannerData';
+import { BANNER_DATA } from '@/constants/textData/bannerData';
 
 export default function Community() {
   return (

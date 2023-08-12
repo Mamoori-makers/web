@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { ROADMAP_CONTENTS } from '@/constants/roadmapData';
+import { ROADMAP_CONTENTS } from '@/constants/textData/roadmapData';
 
 export default function Roadmap() {
   return (

@@ -1,7 +1,7 @@
 import Image from 'next/image';
 
 import { gradientTextStyle } from '@/constants/classNames/gradientTextStyle';
-import { MEMBER_DATA } from '@/constants/memberData';
+import { MEMBER_DATA } from '@/constants/textData/memberData';
 
 import { MemberCard } from '../MemberCard';
 

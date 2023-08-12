@@ -28,7 +28,6 @@ export const ROADMAP_CONTENTS = [
   },
   {
     ...ROADMAP_STEPS.step2,
-
     description:
       '유서를 작성해 보신 적이 없는 여러분들을 위해, 어떻게 작성해야 하는지 가이드를 준비했어요.',
     link: '/roadmap/will',

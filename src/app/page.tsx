@@ -3,8 +3,8 @@ import { Footer } from '@/components/Footer';
 import { GNB } from '@/components/GNB';
 import { IntroItem } from '@/components/Intro';
 import { HomeIntro } from '@/components/Intro/HomeIntro';
-import { BANNER_DATA } from '@/constants/bannerData';
-import { IntroItemData } from '@/constants/introItemData';
+import { BANNER_DATA } from '@/constants/textData/bannerData';
+import { IntroItemData } from '@/constants/textData/introItemData';
 
 export default function Home() {
   return (

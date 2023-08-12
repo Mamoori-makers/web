@@ -1,6 +1,6 @@
 import { IconTitle } from '@/components/IconTitle';
-import { ROADMAP_STEPS } from '@/constants/roadmapData';
-import { WILL_GUIDE } from '@/constants/willGuideData';
+import { ROADMAP_STEPS } from '@/constants/textData/roadmapData';
+import { WILL_GUIDE } from '@/constants/textData/willGuideData';
 
 type WillGuideContent = {
   subtitle: string;

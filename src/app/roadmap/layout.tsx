@@ -4,7 +4,7 @@ import { Banner } from '@/components/Banner';
 import { Footer } from '@/components/Footer';
 import { GNB } from '@/components/GNB';
 import { RoadmapMenu } from '@/components/RoadmapMenu';
-import { BANNER_DATA } from '@/constants/bannerData';
+import { BANNER_DATA } from '@/constants/textData/bannerData';
 
 export default function RoadmapLayout({ children }: { children: React.ReactNode }) {
   return (
