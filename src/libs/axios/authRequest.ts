@@ -2,13 +2,17 @@ import axios, { RawAxiosRequestHeaders, AxiosHeaders } from 'axios';
 
 import { ApiPathType } from '@/constants/paths/apiPath';
 
-import { axiosInstance } from './instance';
-
-type Options = {
+export type Options = {
   headers?: RawAxiosRequestHeaders | AxiosHeaders;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   params?: any;
 };
+
+const axiosInstance = axios.create({
+  baseURL: 'https://api.mamoori.life',
+  timeout: 10000,
+  headers: { 'Content-Type': 'application/json' },
+});
 
 const isDevMode = process.env.NODE_ENV === 'development';
 
