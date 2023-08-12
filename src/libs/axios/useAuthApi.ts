@@ -2,6 +2,8 @@ import axios, { RawAxiosRequestHeaders, AxiosHeaders } from 'axios';
 
 import { ApiPathType } from '@/constants/paths/apiPath';
 
+import { axiosInstance } from './instance';
+
 type Options = {
   headers?: RawAxiosRequestHeaders | AxiosHeaders;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -9,12 +11,6 @@ type Options = {
 };
 
 const isDevMode = process.env.NODE_ENV === 'development';
-
-const axiosInstance = axios.create({
-  baseURL: 'https://api.mamoori.life',
-  timeout: 10000,
-  headers: { 'Content-Type': 'application/json' },
-});
 
 // TODO: Error handling - 구체적인 에러 처리 로직 구현
 export const getAuthRequest = async (
