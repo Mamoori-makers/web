@@ -1,14 +1,16 @@
 'use client';
 
 import * as Checkbox from '@radix-ui/react-checkbox';
+import { useAtomValue } from 'jotai';
 import { useRouter } from 'next/navigation';
 import { Dispatch, SetStateAction, useState } from 'react';
 
 import { IconTitle } from '@/components/IconTitle';
 import { ROADMAP_STEPS } from '@/constants/textData/roadmapData';
+import { CheckIcon } from '@/icons/CheckIcon';
 import { useChecklistTask } from '@/libs/react-query/useChecklist';
+import { loginStateAtom } from '@/stores/atoms/loginStateAtom';
 
-import { CheckIcon } from './checkIcon';
 import { ChecklistSkeleton } from './ChecklistSkeleton';
 
 type CheckItemProps = {
@@ -40,14 +42,19 @@ const CheckItem = ({ content, setCheckCount, id }: CheckItemProps) => {
   );
 };
 
+// TODO: fetch checklist data at server
 export default function Checklist() {
   const [checkCount, setCheckCount] = useState(0);
   const router = useRouter();
   const { data: checklistTasks, isSuccess } = useChecklistTask();
+  const isLoggedIn = useAtomValue(loginStateAtom);
 
   // TODO: implement checklist save feature
   const handleSaveResultClick = () => {
-    router.push('/login');
+    if (!isLoggedIn) {
+      router.push('/login');
+      return;
+    }
   };
 
   return (
