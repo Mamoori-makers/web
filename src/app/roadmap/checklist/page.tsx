@@ -4,6 +4,7 @@ import * as Checkbox from '@radix-ui/react-checkbox';
 import { useAtomValue } from 'jotai';
 import { useRouter } from 'next/navigation';
 import { Dispatch, SetStateAction, useState } from 'react';
+import toast, { Toaster } from 'react-hot-toast';
 
 import { IconTitle } from '@/components/IconTitle';
 import { ROADMAP_STEPS } from '@/constants/textData/roadmapData';
@@ -63,7 +64,12 @@ export default function Checklist() {
   const router = useRouter();
   const { data: checklistTasks, isSuccess } = useChecklistTask();
   const accessToken = useAtomValue(accessTokenAtom);
-  const { mutate: addChecklist } = useAddChecklist(accessToken);
+  const {
+    mutate: addChecklist,
+    isSuccess: isAddSuccess,
+    isError: isAddError,
+    error: addError,
+  } = useAddChecklist(accessToken);
   const isLoggedIn = useAtomValue(loginStateAtom);
 
   const handleSubmitChecklist = (event: React.FormEvent) => {
@@ -74,54 +80,76 @@ export default function Checklist() {
     }
     if (checklistState && checklistState.length) {
       addChecklist(checklistState);
+      if (isAddSuccess) {
+        toast(`체크리스트 결과를 저장했어요!
+        마이페이지에서 확인할 수 있어요.`);
+        return;
+      }
+      if (isAddError) {
+        toast(`체크리스트를 저장하지 못했어요.`);
+        console.error(addError);
+        return;
+      }
     }
   };
 
   return (
-    <div className="roadmap-container">
-      <IconTitle data={ROADMAP_STEPS.step3} />
-      <div className="mt-6 rounded-lg bg-slate-500 p-3 text-white">
-        <p className="mb-3 font-semibold">나의 죽음 준비는 어느 정도일까요?</p>
-        <p className="mb-2 text-sm text-gray-200">
-          ✓ 마무리가 준비한 체크리스트를 통해 구체적으로 무엇이 준비되었고 무엇이 그렇지 않은지
-          확인할 수 있어요.
-        </p>
-        <p className="text-sm text-gray-200">
-          ✓ 지금의 마무리 준비 정도를 저장하고, 아직 부족한 부분이 있다면 더 준비한 후 다시 돌아와
-          체크할 수도 있어요.
-        </p>
-      </div>
-      <form onSubmit={handleSubmitChecklist}>
-        {isSuccess && checklistTasks ? (
-          <>
-            <div className="p-3 text-end text-sm text-brown-200">{`${checkCount} / ${checklistTasks.length}`}</div>
-            <div className="mb-5">
-              {checklistTasks.map(({ id, task }) => {
-                return (
-                  <CheckItem
-                    key={id}
-                    content={task}
-                    setCheckCount={setCheckCount}
-                    setChecklistState={setChecklistState}
-                    id={id.toString()}
-                  />
-                );
-              })}
-            </div>
-          </>
-        ) : (
-          <ChecklistSkeleton />
-        )}
-        <div className="flex flex-col items-center">
-          <button
-            className="my-1 w-full rounded-lg bg-brown-100 p-2 text-white shadow-md shadow-stone-500/50 sm:w-96"
-            disabled={checkCount === 0}
-            style={{ opacity: checkCount === 0 ? '0.5' : 1 }}
-          >
-            결과 저장하기
-          </button>
+    <>
+      <div className="roadmap-container">
+        <IconTitle data={ROADMAP_STEPS.step3} />
+        <div className="mt-6 rounded-lg bg-slate-500 p-3 text-white">
+          <p className="mb-3 font-semibold">나의 죽음 준비는 어느 정도일까요?</p>
+          <p className="mb-2 text-sm text-gray-200">
+            ✓ 마무리가 준비한 체크리스트를 통해 구체적으로 무엇이 준비되었고 무엇이 그렇지 않은지
+            확인할 수 있어요.
+          </p>
+          <p className="text-sm text-gray-200">
+            ✓ 지금의 마무리 준비 정도를 저장하고, 아직 부족한 부분이 있다면 더 준비한 후 다시 돌아와
+            체크할 수도 있어요.
+          </p>
         </div>
-      </form>
-    </div>
+        <form onSubmit={handleSubmitChecklist}>
+          {isSuccess && checklistTasks ? (
+            <>
+              <div className="p-3 text-end text-sm text-brown-200">{`${checkCount} / ${checklistTasks.length}`}</div>
+              <div className="mb-5">
+                {checklistTasks.map(({ id, task }) => {
+                  return (
+                    <CheckItem
+                      key={id}
+                      content={task}
+                      setCheckCount={setCheckCount}
+                      setChecklistState={setChecklistState}
+                      id={id.toString()}
+                    />
+                  );
+                })}
+              </div>
+            </>
+          ) : (
+            <ChecklistSkeleton />
+          )}
+          <div className="flex flex-col items-center">
+            <button
+              className="my-1 w-full rounded-lg bg-brown-100 p-2 text-white shadow-md shadow-stone-500/50 sm:w-96"
+              disabled={checkCount === 0}
+              style={{ opacity: checkCount === 0 ? '0.5' : 1 }}
+            >
+              체크리스트 저장하기
+            </button>
+          </div>
+        </form>
+      </div>
+      <Toaster
+        containerStyle={{
+          top: 80,
+        }}
+        toastOptions={{
+          style: {
+            background: 'rgb(214 211 209)',
+          },
+        }}
+      />
+    </>
   );
 }
