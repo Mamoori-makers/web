@@ -1,7 +1,7 @@
-import { UseQueryResult, useMutation, useQuery } from '@tanstack/react-query';
+import { UseQueryResult, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { API_PATH } from '@/constants/paths/apiPath';
-import { getAuthRequest } from '@/libs/axios/authRequest';
+import { getAuthRequest, postAuthRequest } from '@/libs/axios/authRequest';
 import { getRequest } from '@/libs/axios/getRequest';
 
 import { QUERY_KEY } from './queryKey';
@@ -41,7 +41,6 @@ export const useChecklistTask = (): UseQueryResult<ChecklistTask[]> => {
   });
 };
 
-// TODO: add mutation for modifying and deleting the checklist
 export const useGetChecklist = (accessToken: string): UseQueryResult<TotalChecklist> => {
   return useQuery({
     queryKey: [QUERY_KEY.checklist, accessToken],
@@ -50,8 +49,14 @@ export const useGetChecklist = (accessToken: string): UseQueryResult<TotalCheckl
   });
 };
 
+export type AddChecklistPayloadType = Omit<ChecklistItem, 'task'>;
+
 export const useAddChecklist = (accessToken: string) => {
+  const queryClient = useQueryClient();
+
   return useMutation({
-    mutationFn: () => getAuthRequest(API_PATH.checklist, accessToken),
+    mutationFn: (checklistData: AddChecklistPayloadType[]) =>
+      postAuthRequest(API_PATH.checklist, checklistData, accessToken),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: [QUERY_KEY.checklist] }),
   });
 };
