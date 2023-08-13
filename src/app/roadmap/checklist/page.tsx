@@ -8,7 +8,12 @@ import { Dispatch, SetStateAction, useState } from 'react';
 import { IconTitle } from '@/components/IconTitle';
 import { ROADMAP_STEPS } from '@/constants/textData/roadmapData';
 import { CheckIcon } from '@/icons/CheckIcon';
-import { useChecklistTask } from '@/libs/react-query/useChecklist';
+import {
+  AddChecklistPayloadType,
+  useAddChecklist,
+  useChecklistTask,
+} from '@/libs/react-query/useChecklist';
+import { accessTokenAtom } from '@/stores/atoms/accessTokenAtom';
 import { loginStateAtom } from '@/stores/atoms/loginStateAtom';
 
 import { ChecklistSkeleton } from './ChecklistSkeleton';
@@ -16,12 +21,22 @@ import { ChecklistSkeleton } from './ChecklistSkeleton';
 type CheckItemProps = {
   content: string;
   setCheckCount: Dispatch<SetStateAction<number>>;
+  setChecklistState: Dispatch<SetStateAction<AddChecklistPayloadType[]>>;
   id: string;
 };
 
-const CheckItem = ({ content, setCheckCount, id }: CheckItemProps) => {
+const CheckItem = ({ content, setCheckCount, setChecklistState, id }: CheckItemProps) => {
   const handleCheck = (isChecked: boolean) => {
-    isChecked ? setCheckCount((prev) => prev + 1) : setCheckCount((prev) => prev - 1);
+    if (isChecked) {
+      setCheckCount((prev) => prev + 1);
+      setChecklistState((prev) => [...prev, { id: Number(id), isChecked }]);
+    } else {
+      setCheckCount((prev) => prev - 1);
+      setChecklistState((prev) => {
+        const filtered = prev.filter((v) => v.id !== Number(id));
+        return filtered;
+      });
+    }
   };
 
   return (
@@ -44,15 +59,21 @@ const CheckItem = ({ content, setCheckCount, id }: CheckItemProps) => {
 
 export default function Checklist() {
   const [checkCount, setCheckCount] = useState(0);
+  const [checklistState, setChecklistState] = useState<AddChecklistPayloadType[]>([]);
   const router = useRouter();
   const { data: checklistTasks, isSuccess } = useChecklistTask();
+  const accessToken = useAtomValue(accessTokenAtom);
+  const { mutate: addChecklist } = useAddChecklist(accessToken);
   const isLoggedIn = useAtomValue(loginStateAtom);
 
-  // TODO: implement checklist save feature
-  const handleSaveResultClick = () => {
+  const handleSubmitChecklist = (event: React.FormEvent) => {
+    event.preventDefault();
     if (!isLoggedIn) {
       router.push('/login');
       return;
+    }
+    if (checklistState && checklistState.length) {
+      addChecklist(checklistState);
     }
   };
 
@@ -70,35 +91,37 @@ export default function Checklist() {
           체크할 수도 있어요.
         </p>
       </div>
-      {isSuccess && checklistTasks ? (
-        <>
-          <div className="p-3 text-end text-sm text-brown-200">{`${checkCount} / ${checklistTasks.length}`}</div>
-          <div className="mb-5">
-            {checklistTasks.map(({ id, task }) => {
-              return (
-                <CheckItem
-                  key={id}
-                  content={task}
-                  setCheckCount={setCheckCount}
-                  id={id.toString()}
-                />
-              );
-            })}
-          </div>
-        </>
-      ) : (
-        <ChecklistSkeleton />
-      )}
-      <div className="flex flex-col items-center">
-        <button
-          className="my-1 w-full rounded-lg bg-brown-100 p-2 text-white shadow-md shadow-stone-500/50 sm:w-96"
-          onClick={handleSaveResultClick}
-          disabled={checkCount === 0}
-          style={{ opacity: checkCount === 0 ? '0.5' : 1 }}
-        >
-          결과 저장하기
-        </button>
-      </div>
+      <form onSubmit={handleSubmitChecklist}>
+        {isSuccess && checklistTasks ? (
+          <>
+            <div className="p-3 text-end text-sm text-brown-200">{`${checkCount} / ${checklistTasks.length}`}</div>
+            <div className="mb-5">
+              {checklistTasks.map(({ id, task }) => {
+                return (
+                  <CheckItem
+                    key={id}
+                    content={task}
+                    setCheckCount={setCheckCount}
+                    setChecklistState={setChecklistState}
+                    id={id.toString()}
+                  />
+                );
+              })}
+            </div>
+          </>
+        ) : (
+          <ChecklistSkeleton />
+        )}
+        <div className="flex flex-col items-center">
+          <button
+            className="my-1 w-full rounded-lg bg-brown-100 p-2 text-white shadow-md shadow-stone-500/50 sm:w-96"
+            disabled={checkCount === 0}
+            style={{ opacity: checkCount === 0 ? '0.5' : 1 }}
+          >
+            결과 저장하기
+          </button>
+        </div>
+      </form>
     </div>
   );
 }
