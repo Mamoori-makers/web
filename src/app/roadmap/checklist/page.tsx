@@ -42,7 +42,6 @@ const CheckItem = ({ content, setCheckCount, id }: CheckItemProps) => {
   );
 };
 
-// TODO: fetch checklist data at server
 export default function Checklist() {
   const [checkCount, setCheckCount] = useState(0);
   const router = useRouter();
@@ -94,6 +93,8 @@ export default function Checklist() {
         <button
           className="my-1 w-full rounded-lg bg-brown-100 p-2 text-white shadow-md shadow-stone-500/50 sm:w-96"
           onClick={handleSaveResultClick}
+          disabled={checkCount === 0}
+          style={{ opacity: checkCount === 0 ? '0.5' : 1 }}
         >
           결과 저장하기
         </button>
