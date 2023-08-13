@@ -30,7 +30,7 @@ type TotalChecklist = {
   totalChecklistCount: number;
   page: number;
   size: number;
-  latestChecklistDate: string;
+  latestChecklistDate: string | null;
   checklists: Checklist[];
 };
 
