@@ -1,21 +1,17 @@
 'use client';
 
-import { useAtomValue } from 'jotai';
 import Image from 'next/image';
-import { useEffect } from 'react';
 
+import { CountBox } from '@/components/CountBox';
 import { useGetChecklist } from '@/libs/react-query/useChecklist';
-import { accessTokenAtom } from '@/stores/atoms/accessTokenAtom';
+import { calculateDaysFromDateString } from '@/utils/date';
 
 export default function MyChecklist() {
-  const accessToken = useAtomValue(accessTokenAtom);
-  const { data: checklist, isSuccess } = useGetChecklist(accessToken);
+  const { data: checklistData, isSuccess } = useGetChecklist();
 
-  useEffect(() => {
-    if (isSuccess) {
-      console.log(checklist);
-    }
-  }, [isSuccess]);
+  if (!checklistData || !isSuccess) {
+    return <></>;
+  }
 
   return (
     <>
@@ -37,7 +33,22 @@ export default function MyChecklist() {
           </p>
         </div>
       </div>
-      <div></div>
+      <div className="flex flex-col items-center">
+        <div className="grid w-fit grid-cols-2 gap-3 p-3">
+          <CountBox
+            title="마지막으로 체크리스트를 작성한 지"
+            count={calculateDaysFromDateString(checklistData?.latestChecklistDate || '')}
+            unit="일"
+            backgroundColor="#CBAC5C"
+          />
+          <CountBox
+            title="작성한 체크리스트"
+            count={checklistData?.totalChecklistCount}
+            unit="개"
+            backgroundColor="#9E8888"
+          />
+        </div>
+      </div>
     </>
   );
 }
