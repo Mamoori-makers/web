@@ -4,6 +4,7 @@ import { useAtom } from 'jotai';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
 import { ProfileImage } from '@/components/ProfileImage';
 import { API_PATH } from '@/constants/paths/apiPath';
@@ -19,14 +20,16 @@ export default function MyPage() {
   const [userData, setUserData] = useAtom(userDataAtom);
   const router = useRouter();
 
-  if (!isLoggedIn) {
-    router.push(ROUTE_PATH.login);
-  }
+  useEffect(() => {
+    if (!isLoggedIn) {
+      router.push(ROUTE_PATH.login);
+    }
 
-  if (!userData) {
-    alert('데이터를 불러오지 못했습니다. 다시 로그인 해 주세요.');
-    router.push(ROUTE_PATH.login);
-  }
+    if (!userData) {
+      alert('데이터를 불러오지 못했습니다. 다시 로그인 해 주세요.');
+      router.push(ROUTE_PATH.login);
+    }
+  }, [isLoggedIn, userData, router]);
 
   const { image, name, email } = userData as UserData;
 
