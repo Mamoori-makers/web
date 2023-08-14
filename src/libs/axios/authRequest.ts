@@ -41,14 +41,12 @@ export const getAuthRequest = async (
     return data;
   } catch (error) {
     console.error(error);
+    throw error;
   }
 };
 
 export const postAuthRequest = async <T>(apiPath: string, payload: T) => {
   const accessToken = getCookie(ACCESS_TOKEN_COOKIE_KEY);
-  if (!accessToken) {
-    return;
-  }
 
   try {
     if (isDevMode) {
@@ -65,6 +63,7 @@ export const postAuthRequest = async <T>(apiPath: string, payload: T) => {
     return data;
   } catch (error) {
     console.error(error);
+    throw error;
   }
 };
 
@@ -84,6 +83,7 @@ export const putAuthRequest = async <T>(apiPath: string, payload: T, accessToken
     return data;
   } catch (error) {
     console.error(error);
+    throw error;
   }
 };
 
@@ -102,5 +102,6 @@ export const deleteAuthRequest = async (apiPath: string, accessToken: string) =>
     return true;
   } catch (error) {
     console.error(error);
+    throw error;
   }
 };
