@@ -4,7 +4,7 @@ import { CountBox } from '@/components/CountBox';
 import { useGetChecklist } from '@/libs/react-query/useChecklist';
 import { calculateDaysFromDateString } from '@/utils/date';
 
-import { MyChecklistItem } from './MyChecklistItem';
+import { MyChecklistItem } from './_components/MyChecklistItem';
 
 export default function MyChecklist() {
   const { data: checklistData, isSuccess } = useGetChecklist();
