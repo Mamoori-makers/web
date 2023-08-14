@@ -3,7 +3,7 @@
 import { useAtom } from 'jotai';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 import { ProfileImage } from '@/components/ProfileImage';
 import { API_PATH } from '@/constants/paths/apiPath';
