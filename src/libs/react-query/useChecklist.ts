@@ -51,12 +51,12 @@ export const useGetChecklist = (accessToken: string): UseQueryResult<TotalCheckl
 
 export type AddChecklistPayloadType = Omit<ChecklistItem, 'task'>;
 
-export const useAddChecklist = (accessToken: string) => {
+export const useAddChecklist = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: (checklistData: AddChecklistPayloadType[]) =>
-      postAuthRequest(API_PATH.checklist, checklistData, accessToken),
+      postAuthRequest(API_PATH.checklist, checklistData),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: [QUERY_KEY.checklist] }),
   });
 };

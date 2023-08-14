@@ -14,7 +14,6 @@ import {
   useAddChecklist,
   useChecklistTask,
 } from '@/libs/react-query/useChecklist';
-import { accessTokenAtom } from '@/stores/atoms/accessTokenAtom';
 import { loginStateAtom } from '@/stores/atoms/loginStateAtom';
 
 import { ChecklistSkeleton } from './ChecklistSkeleton';
@@ -63,8 +62,7 @@ export default function Checklist() {
   const [checklistState, setChecklistState] = useState<AddChecklistPayloadType[]>([]);
   const router = useRouter();
   const { data: checklistTasks, isSuccess } = useChecklistTask();
-  const accessToken = useAtomValue(accessTokenAtom);
-  const { mutate: addChecklist } = useAddChecklist(accessToken);
+  const { mutate: addChecklist } = useAddChecklist();
   const isLoggedIn = useAtomValue(loginStateAtom);
 
   const handleSubmitChecklist = async (event: React.FormEvent) => {

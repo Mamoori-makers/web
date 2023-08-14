@@ -1,6 +1,9 @@
 import axios, { RawAxiosRequestHeaders, AxiosHeaders } from 'axios';
 
 import { ApiPathType } from '@/constants/paths/apiPath';
+import { getCookie } from '@/utils/cookie';
+
+const ACCESS_TOKEN_COOKIE_KEY = 'Authorization';
 
 export type Options = {
   headers?: RawAxiosRequestHeaders | AxiosHeaders;
@@ -41,7 +44,12 @@ export const getAuthRequest = async (
   }
 };
 
-export const postAuthRequest = async <T>(apiPath: string, payload: T, accessToken: string) => {
+export const postAuthRequest = async <T>(apiPath: string, payload: T) => {
+  const accessToken = getCookie(ACCESS_TOKEN_COOKIE_KEY);
+  if (!accessToken) {
+    return;
+  }
+
   try {
     if (isDevMode) {
       const { data } = await axios.post(apiPath, payload);
