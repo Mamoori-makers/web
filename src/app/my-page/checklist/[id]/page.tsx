@@ -1,5 +1,10 @@
+'use client';
+
+import { useGetChecklistById } from '@/libs/react-query/useChecklist';
+
 export default function ChecklistItemDetail({ params }: { params: { id: string } }) {
   const { id } = params;
-  console.log(id);
-  return <div></div>;
+  const { data: checklist } = useGetChecklistById(id);
+
+  return <div>{checklist?.progress}%</div>;
 }

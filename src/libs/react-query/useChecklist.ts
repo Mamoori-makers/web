@@ -50,6 +50,13 @@ export const useGetChecklist = (): UseQueryResult<TotalChecklist> => {
   });
 };
 
+export const useGetChecklistById = (id = ''): UseQueryResult<Checklist> => {
+  return useQuery({
+    queryKey: [QUERY_KEY.checklist, id],
+    queryFn: () => getAuthRequest(`${API_PATH.checklist}/${id}`),
+  });
+};
+
 export type AddChecklistPayloadType = Omit<ChecklistItem, 'task'>;
 
 export const useAddChecklist = () => {

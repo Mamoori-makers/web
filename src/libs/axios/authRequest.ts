@@ -19,7 +19,7 @@ const axiosInstance = axios.create({
 
 const isDevMode = process.env.NODE_ENV === 'development';
 
-export const getAuthRequest = async (apiPath: ApiPathType, options?: Options) => {
+export const getAuthRequest = async (apiPath: ApiPathType | string, options?: Options) => {
   const accessToken = getCookie(ACCESS_TOKEN_COOKIE_KEY);
   try {
     if (isDevMode) {
@@ -41,7 +41,7 @@ export const getAuthRequest = async (apiPath: ApiPathType, options?: Options) =>
   }
 };
 
-export const postAuthRequest = async <T>(apiPath: string, payload: T) => {
+export const postAuthRequest = async <T>(apiPath: ApiPathType | string, payload: T) => {
   const accessToken = getCookie(ACCESS_TOKEN_COOKIE_KEY);
 
   try {
@@ -63,7 +63,7 @@ export const postAuthRequest = async <T>(apiPath: string, payload: T) => {
   }
 };
 
-export const putAuthRequest = async <T>(apiPath: string, payload: T) => {
+export const putAuthRequest = async <T>(apiPath: ApiPathType | string, payload: T) => {
   const accessToken = getCookie(ACCESS_TOKEN_COOKIE_KEY);
   try {
     if (isDevMode) {
@@ -84,7 +84,7 @@ export const putAuthRequest = async <T>(apiPath: string, payload: T) => {
   }
 };
 
-export const deleteAuthRequest = async (apiPath: string) => {
+export const deleteAuthRequest = async (apiPath: ApiPathType | string) => {
   const accessToken = getCookie(ACCESS_TOKEN_COOKIE_KEY);
   try {
     if (isDevMode) {
