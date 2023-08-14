@@ -1,4 +1,5 @@
 import { UseQueryResult, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { AxiosError } from 'axios';
 
 import { API_PATH } from '@/constants/paths/apiPath';
 import { getAuthRequest, postAuthRequest } from '@/libs/axios/authRequest';
@@ -58,8 +59,9 @@ export const useAddChecklist = () => {
     mutationFn: (checklistData: AddChecklistPayloadType[]) =>
       postAuthRequest(API_PATH.checklist, checklistData),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: [QUERY_KEY.checklist] }),
-    onError: (error) => {
-      throw error;
+    onError: (error: AxiosError) => {
+      const response = error.response;
+      return response?.data;
     },
   });
 };
