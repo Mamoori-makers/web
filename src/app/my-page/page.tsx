@@ -31,8 +31,6 @@ export default function MyPage() {
     }
   }, [isLoggedIn, userData, router]);
 
-  const { image, name, email } = userData as UserData;
-
   const handleLogoutButtonClick = async () => {
     if (!window.confirm('정말 로그아웃 하시겠습니까?')) {
       return;
@@ -59,9 +57,9 @@ export default function MyPage() {
             className="flex h-fit w-[300px] flex-col items-center justify-center gap-2 rounded-lg bg-[#473d3d5c] p-5 text-white"
             style={{ zIndex: 1 }}
           >
-            <ProfileImage imageSrc={image || ''} alt="profile" size={100} />
-            <p className="font-bold">{name}</p>
-            <p className="text-sm">{email}</p>
+            <ProfileImage imageSrc={(userData as UserData)?.image || ''} alt="profile" size={100} />
+            <p className="font-bold">{(userData as UserData)?.name}</p>
+            <p className="text-sm">{(userData as UserData)?.email}</p>
           </div>
         </div>
         <div className="flex w-full flex-col items-center bg-gray-200 p-5">
