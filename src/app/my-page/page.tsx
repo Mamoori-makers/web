@@ -3,7 +3,7 @@
 import { useAtom } from 'jotai';
 import Image from 'next/image';
 import Link from 'next/link';
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/router';
 
 import { ProfileImage } from '@/components/ProfileImage';
 import { API_PATH } from '@/constants/paths/apiPath';
@@ -17,14 +17,15 @@ import { userDataAtom } from '@/stores/atoms/userDataAtom';
 export default function MyPage() {
   const [isLoggedIn, setIsLoggedIn] = useAtom(loginStateAtom);
   const [userData, setUserData] = useAtom(userDataAtom);
+  const router = useRouter();
 
   if (!isLoggedIn) {
-    redirect(ROUTE_PATH.login);
+    router.push(ROUTE_PATH.login);
   }
 
   if (!userData) {
     alert('데이터를 불러오지 못했습니다. 다시 로그인 해 주세요.');
-    redirect(ROUTE_PATH.login);
+    router.push(ROUTE_PATH.login);
   }
 
   const { image, name, email } = userData as UserData;
@@ -34,10 +35,10 @@ export default function MyPage() {
       return;
     }
 
+    router.push(ROUTE_PATH.home);
     await deleteAuthRequest(API_PATH.token);
     setIsLoggedIn(false);
     setUserData(null);
-    redirect(ROUTE_PATH.home);
   };
 
   return (
