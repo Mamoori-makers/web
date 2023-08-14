@@ -10,3 +10,8 @@ export const calculateDaysFromDateString = (dateString: string) => {
   const daysDiff = today.diff(targetDate, 'day');
   return daysDiff;
 };
+
+export const formatDateToKorean = (dateString: string) => {
+  const formattedDate = dayjs(dateString).format('YYYY년 M월 D일');
+  return formattedDate;
+};

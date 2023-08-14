@@ -24,6 +24,7 @@ export type Checklist = {
   createdAt: string;
   checkedTaskCount: number;
   totalTaskCount: number;
+  progress: number;
   checklist: ChecklistItem[];
 };
 
