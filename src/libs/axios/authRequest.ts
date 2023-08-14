@@ -19,12 +19,8 @@ const axiosInstance = axios.create({
 
 const isDevMode = process.env.NODE_ENV === 'development';
 
-// TODO: Error handling - 구체적인 에러 처리 로직 구현
-export const getAuthRequest = async (
-  apiPath: ApiPathType,
-  accessToken: string,
-  options?: Options
-) => {
+export const getAuthRequest = async (apiPath: ApiPathType, options?: Options) => {
+  const accessToken = getCookie(ACCESS_TOKEN_COOKIE_KEY);
   try {
     if (isDevMode) {
       const { data } = await axios.get(apiPath, { ...options });
@@ -67,7 +63,8 @@ export const postAuthRequest = async <T>(apiPath: string, payload: T) => {
   }
 };
 
-export const putAuthRequest = async <T>(apiPath: string, payload: T, accessToken: string) => {
+export const putAuthRequest = async <T>(apiPath: string, payload: T) => {
+  const accessToken = getCookie(ACCESS_TOKEN_COOKIE_KEY);
   try {
     if (isDevMode) {
       const { data } = await axios.put(apiPath, payload);
@@ -87,7 +84,8 @@ export const putAuthRequest = async <T>(apiPath: string, payload: T, accessToken
   }
 };
 
-export const deleteAuthRequest = async (apiPath: string, accessToken: string) => {
+export const deleteAuthRequest = async (apiPath: string) => {
+  const accessToken = getCookie(ACCESS_TOKEN_COOKIE_KEY);
   try {
     if (isDevMode) {
       await axios.delete(apiPath);

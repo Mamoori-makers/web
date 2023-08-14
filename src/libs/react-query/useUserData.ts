@@ -12,10 +12,9 @@ export type UserData = {
   image: string;
 };
 
-export const useUserData = (accessToken: string): UseQueryResult<UserData> => {
+export const useUserData = (): UseQueryResult<UserData> => {
   return useQuery({
-    queryKey: [QUERY_KEY.user, accessToken],
-    queryFn: () => getAuthRequest(API_PATH.user, accessToken),
-    enabled: !!accessToken.length,
+    queryKey: [QUERY_KEY.user],
+    queryFn: () => getAuthRequest(API_PATH.user),
   });
 };

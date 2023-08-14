@@ -11,14 +11,12 @@ import { ROUTE_PATH } from '@/constants/paths/routePath';
 import { RightArrowIcon } from '@/icons/RightArrowIcon';
 import { deleteAuthRequest } from '@/libs/axios/authRequest';
 import { UserData } from '@/libs/react-query/useUserData';
-import { accessTokenAtom } from '@/stores/atoms/accessTokenAtom';
 import { loginStateAtom } from '@/stores/atoms/loginStateAtom';
 import { userDataAtom } from '@/stores/atoms/userDataAtom';
 
 export default function MyPage() {
   const [isLoggedIn, setIsLoggedIn] = useAtom(loginStateAtom);
   const [userData, setUserData] = useAtom(userDataAtom);
-  const [accessToken, setAccessToken] = useAtom(accessTokenAtom);
 
   if (!isLoggedIn) {
     redirect(ROUTE_PATH.login);
@@ -36,10 +34,9 @@ export default function MyPage() {
       return;
     }
 
-    await deleteAuthRequest(API_PATH.token, accessToken);
+    await deleteAuthRequest(API_PATH.token);
     setIsLoggedIn(false);
     setUserData(null);
-    setAccessToken('');
     redirect(ROUTE_PATH.home);
   };
 

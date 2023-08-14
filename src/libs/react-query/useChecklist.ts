@@ -42,11 +42,10 @@ export const useChecklistTask = (): UseQueryResult<ChecklistTask[]> => {
   });
 };
 
-export const useGetChecklist = (accessToken: string): UseQueryResult<TotalChecklist> => {
+export const useGetChecklist = (): UseQueryResult<TotalChecklist> => {
   return useQuery({
-    queryKey: [QUERY_KEY.checklist, accessToken],
-    queryFn: () => getAuthRequest(API_PATH.checklist, accessToken),
-    enabled: !!accessToken.length,
+    queryKey: [QUERY_KEY.checklist],
+    queryFn: () => getAuthRequest(API_PATH.checklist),
   });
 };
 
