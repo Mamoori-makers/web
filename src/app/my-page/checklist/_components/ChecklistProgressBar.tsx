@@ -1,6 +1,6 @@
 import { ProgressBar } from '@/components/ProgressBar';
 
-type ChecklistProgressBar = {
+type ChecklistProgressBarProps = {
   progress: number;
   checkedTaskCount: number;
   totalTaskCount: number;
@@ -10,7 +10,7 @@ export const ChecklistProgressBar = ({
   progress,
   checkedTaskCount,
   totalTaskCount,
-}: ChecklistProgressBar) => {
+}: ChecklistProgressBarProps) => {
   return (
     <div className="w-full">
       <ProgressBar percent={progress} />
