@@ -130,6 +130,9 @@ export default function Checklist() {
             <ChecklistSkeleton />
           )}
           <div className="flex flex-col items-center">
+            <span className="text-sm text-brown-100">
+              *체크리스트는 최대 하루에 한 번 저장할 수 있어요.
+            </span>
             <button
               className="my-1 w-full rounded-lg bg-brown-100 p-2 text-white shadow-md shadow-stone-500/50 sm:w-96"
               disabled={checkCount === 0}
