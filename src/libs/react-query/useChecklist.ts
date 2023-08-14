@@ -58,5 +58,8 @@ export const useAddChecklist = () => {
     mutationFn: (checklistData: AddChecklistPayloadType[]) =>
       postAuthRequest(API_PATH.checklist, checklistData),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: [QUERY_KEY.checklist] }),
+    onError: (error) => {
+      throw error;
+    },
   });
 };
