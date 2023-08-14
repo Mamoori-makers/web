@@ -62,7 +62,12 @@ export default function Checklist() {
   const [checklistState, setChecklistState] = useState<AddChecklistPayloadType[]>([]);
   const router = useRouter();
   const { data: checklistTasks, isSuccess } = useChecklistTask();
-  const { mutate: addChecklist } = useAddChecklist();
+  const {
+    mutate: addChecklist,
+    isSuccess: isAddSuccess,
+    isError: isAddError,
+    error: addError,
+  } = useAddChecklist();
   const isLoggedIn = useAtomValue(loginStateAtom);
 
   const handleSubmitChecklist = async (event: React.FormEvent) => {
@@ -72,14 +77,15 @@ export default function Checklist() {
       return;
     }
     if (checklistState && checklistState.length) {
-      try {
-        await addChecklist(checklistState);
+      addChecklist(checklistState);
+      if (isAddSuccess) {
         toast(`체크리스트 결과를 저장했어요!
         마이페이지에서 확인할 수 있어요.`);
         return;
-      } catch (error) {
+      }
+      if (isAddError) {
         toast(`체크리스트를 저장하지 못했어요.`);
-        console.error('Unable to save checklist: ', error);
+        console.error('Unable to save checklist: ', addError);
       }
     }
   };
