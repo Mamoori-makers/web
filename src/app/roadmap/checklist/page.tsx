@@ -64,31 +64,24 @@ export default function Checklist() {
   const router = useRouter();
   const { data: checklistTasks, isSuccess } = useChecklistTask();
   const accessToken = useAtomValue(accessTokenAtom);
-  const {
-    mutate: addChecklist,
-    isSuccess: isAddSuccess,
-    isError: isAddError,
-    error: addError,
-  } = useAddChecklist(accessToken);
+  const { mutate: addChecklist } = useAddChecklist(accessToken);
   const isLoggedIn = useAtomValue(loginStateAtom);
 
-  const handleSubmitChecklist = (event: React.FormEvent) => {
+  const handleSubmitChecklist = async (event: React.FormEvent) => {
     event.preventDefault();
     if (!isLoggedIn) {
       router.push('/login');
       return;
     }
     if (checklistState && checklistState.length) {
-      addChecklist(checklistState);
-      if (isAddSuccess) {
+      try {
+        await addChecklist(checklistState);
         toast(`체크리스트 결과를 저장했어요!
         마이페이지에서 확인할 수 있어요.`);
         return;
-      }
-      if (isAddError) {
+      } catch (error) {
         toast(`체크리스트를 저장하지 못했어요.`);
-        console.error(addError);
-        return;
+        console.error('Unable to save checklist: ', error);
       }
     }
   };
