@@ -3,10 +3,11 @@
 import * as Checkbox from '@radix-ui/react-checkbox';
 import { useAtomValue } from 'jotai';
 import { useRouter } from 'next/navigation';
-import { Dispatch, SetStateAction, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 
 import { IconTitle } from '@/components/IconTitle';
+import { ROUTE_PATH } from '@/constants/paths/routePath';
 import { ROADMAP_STEPS } from '@/constants/textData/roadmapData';
 import { CheckIcon } from '@/icons/CheckIcon';
 import {
@@ -73,22 +74,25 @@ export default function Checklist() {
   const handleSubmitChecklist = async (event: React.FormEvent) => {
     event.preventDefault();
     if (!isLoggedIn) {
-      router.push('/login');
+      router.push(ROUTE_PATH.login);
       return;
     }
     if (checklistState && checklistState.length) {
       addChecklist(checklistState);
-      if (isAddSuccess) {
-        toast(`체크리스트 결과를 저장했어요!
-        마이페이지에서 확인할 수 있어요.`);
-        return;
-      }
-      if (isAddError) {
-        toast(`체크리스트를 저장하지 못했어요.`);
-        console.error('Unable to save checklist: ', addError);
-      }
     }
   };
+
+  useEffect(() => {
+    if (isAddSuccess) {
+      toast(`체크리스트 결과를 저장했어요!
+        마이페이지에서 확인할 수 있어요.`);
+      return;
+    }
+    if (isAddError) {
+      toast(`체크리스트를 저장하지 못했어요.`);
+      console.error('Unable to save checklist: ', addError);
+    }
+  }, [isAddSuccess, isAddError, addError]);
 
   return (
     <>
