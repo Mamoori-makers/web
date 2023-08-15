@@ -1,4 +1,9 @@
 import dayjs from 'dayjs';
+import timezone from 'dayjs/plugin/timezone';
+import utc from 'dayjs/plugin/utc';
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 export const calculateDaysFromDateString = (dateString: string) => {
   if (!dateString) {
@@ -14,4 +19,8 @@ export const calculateDaysFromDateString = (dateString: string) => {
 export const formatDateToKorean = (dateString: string) => {
   const formattedDate = dayjs(dateString).format('YYYY년 M월 D일');
   return formattedDate;
+};
+
+export const formatDateTime = (dateString: string) => {
+  return dayjs(dateString).tz('Asia/Seoul').format('YYYY.MM.DD HH:mm:ss').toString();
 };
