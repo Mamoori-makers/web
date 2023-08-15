@@ -2,7 +2,7 @@ import { UseQueryResult, useMutation, useQuery, useQueryClient } from '@tanstack
 import { AxiosError } from 'axios';
 
 import { API_PATH } from '@/constants/paths/apiPath';
-import { getAuthRequest, postAuthRequest } from '@/libs/axios/authRequest';
+import { deleteAuthRequest, getAuthRequest, postAuthRequest } from '@/libs/axios/authRequest';
 import { getRequest } from '@/libs/axios/getRequest';
 
 import { QUERY_KEY } from './queryKey';
@@ -66,6 +66,19 @@ export const useAddChecklist = () => {
     mutationFn: (checklistData: AddChecklistPayloadType[]) =>
       postAuthRequest(API_PATH.checklist, checklistData),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: [QUERY_KEY.checklist] }),
+    onError: (error: AxiosError) => {
+      const response = error.response;
+      return response?.data;
+    },
+  });
+};
+
+export const useDeleteChecklist = (id: string) => {
+  const QueryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: () => deleteAuthRequest(`${API_PATH.checklist}/${id}`),
+    onSuccess: () => QueryClient.invalidateQueries({ queryKey: [QUERY_KEY.checklist] }),
     onError: (error: AxiosError) => {
       const response = error.response;
       return response?.data;
