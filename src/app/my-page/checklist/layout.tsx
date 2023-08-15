@@ -22,7 +22,7 @@ export default function MyPageChecklistLayout({ children }: { children: ReactNod
           </p>
         </div>
       </div>
-      <div className="m-6 flex max-w-4xl flex-col lg:m-12">{children}</div>
+      <div className="m-auto flex max-w-4xl flex-col py-5">{children}</div>
     </>
   );
 }
