@@ -92,6 +92,7 @@ export default function Checklist() {
     if (isAddSuccess) {
       toast(`체크리스트 결과를 저장했어요!
         마이페이지에서 확인할 수 있어요.`);
+      setIsSaveButtonDisabled(true);
       return;
     }
 
