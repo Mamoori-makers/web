@@ -14,6 +14,7 @@ import {
   AddChecklistPayloadType,
   useAddChecklist,
   useChecklistTask,
+  useGetTodayChecklist,
 } from '@/libs/react-query/useChecklist';
 import { loginStateAtom } from '@/stores/atoms/loginStateAtom';
 
@@ -59,16 +60,13 @@ const CheckItem = ({ content, setCheckCount, setChecklistState, id }: CheckItemP
 };
 
 export default function Checklist() {
+  const { data: todayChecklist, isSuccess: isTodaySuccess } = useGetTodayChecklist();
   const [checkCount, setCheckCount] = useState(0);
   const [checklistState, setChecklistState] = useState<AddChecklistPayloadType[]>([]);
   const router = useRouter();
-  const { data: checklistTasks, isSuccess } = useChecklistTask();
-  const {
-    mutate: addChecklist,
-    isSuccess: isAddSuccess,
-    isError: isAddError,
-    error: addError,
-  } = useAddChecklist();
+  const { data: checklistTasks, isSuccess: isTaskSuccess } = useChecklistTask();
+  const { mutate: addChecklist, isSuccess: isAddSuccess, isError: isAddError } = useAddChecklist();
+  const [isSaveButtonDisabled, setIsSaveButtonDisabled] = useState(false);
   const isLoggedIn = useAtomValue(loginStateAtom);
 
   const handleSubmitChecklist = async (event: React.FormEvent) => {
@@ -83,16 +81,25 @@ export default function Checklist() {
   };
 
   useEffect(() => {
+    if (isTodaySuccess) {
+      if (todayChecklist.isTodayChecklistCreated) {
+        setIsSaveButtonDisabled(true);
+      } else {
+        setIsSaveButtonDisabled(false);
+      }
+    }
+
     if (isAddSuccess) {
       toast(`체크리스트 결과를 저장했어요!
         마이페이지에서 확인할 수 있어요.`);
       return;
     }
+
     if (isAddError) {
       toast(`체크리스트를 저장하지 못했어요.`);
-      console.error('Unable to save checklist: ', addError);
+      return;
     }
-  }, [isAddSuccess, isAddError, addError]);
+  }, [isAddSuccess, isAddError, isTodaySuccess, todayChecklist]);
 
   return (
     <>
@@ -110,7 +117,7 @@ export default function Checklist() {
           </p>
         </div>
         <form onSubmit={handleSubmitChecklist}>
-          {isSuccess && checklistTasks ? (
+          {isTaskSuccess && checklistTasks ? (
             <>
               <div className="p-3 text-end text-sm text-brown-200">{`${checkCount} / ${checklistTasks.length}`}</div>
               <div className="mb-5">
@@ -136,8 +143,8 @@ export default function Checklist() {
             </span>
             <button
               className="my-1 w-full rounded-lg bg-brown-100 p-2 text-white shadow-md shadow-stone-500/50 sm:w-96"
-              disabled={checkCount === 0}
-              style={{ opacity: checkCount === 0 ? '0.5' : 1 }}
+              disabled={checkCount === 0 || isSaveButtonDisabled}
+              style={{ opacity: checkCount === 0 || isSaveButtonDisabled ? '0.5' : 1 }}
             >
               체크리스트 저장하기
             </button>

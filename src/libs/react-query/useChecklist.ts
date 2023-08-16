@@ -38,6 +38,10 @@ type TotalChecklist = {
   checklists: Checklist[];
 };
 
+type TodayChecklist = {
+  isTodayChecklistCreated: boolean;
+};
+
 export const useChecklistTask = (): UseQueryResult<ChecklistTask[]> => {
   return useQuery({
     queryKey: [QUERY_KEY.checklistTask],
@@ -49,6 +53,13 @@ export const useGetChecklist = (): UseQueryResult<TotalChecklist> => {
   return useQuery({
     queryKey: [QUERY_KEY.checklist],
     queryFn: () => getAuthRequest(API_PATH.checklist),
+  });
+};
+
+export const useGetTodayChecklist = (): UseQueryResult<TodayChecklist> => {
+  return useQuery({
+    queryKey: [QUERY_KEY.todayChecklist],
+    queryFn: () => getAuthRequest(API_PATH.todayChecklist),
   });
 };
 
