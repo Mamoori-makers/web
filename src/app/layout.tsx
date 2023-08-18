@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import Script from 'next/script';
 
 import Providers from '@/libs/react-query/providers';
+import { MSWComponent } from '@/mocks/MSWComponent';
 
 import type { Metadata } from 'next';
 
@@ -45,7 +46,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         `}
       </Script>
       <body className={inter.className}>
-        <Providers>{children}</Providers>
+        <MSWComponent>
+          <Providers>{children}</Providers>
+        </MSWComponent>
       </body>
     </html>
   );
