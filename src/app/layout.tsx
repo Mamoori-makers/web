@@ -1,4 +1,5 @@
 import './globals.css';
+
 import { Inter } from 'next/font/google';
 import Script from 'next/script';
 
@@ -31,7 +32,7 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const gaTrackingId = process.env.GA_TRACKING_ID;
+  const gaTrackingId = process.env.NEXT_PUBLIC_GA_TRACKING_ID;
 
   return (
     <html lang="en">
