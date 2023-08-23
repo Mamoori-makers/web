@@ -3,6 +3,8 @@ import axios, { RawAxiosRequestHeaders, AxiosHeaders } from 'axios';
 import { ApiPathType } from '@/constants/paths/apiPath';
 import { getCookie } from '@/utils/cookie';
 
+import { axiosInstance } from './axiosInstance';
+
 const ACCESS_TOKEN_COOKIE_KEY = 'Authorization';
 
 export type Options = {
@@ -10,12 +12,6 @@ export type Options = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   params?: any;
 };
-
-const axiosInstance = axios.create({
-  baseURL: 'https://api.mamoori.life',
-  timeout: 10000,
-  headers: { 'Content-Type': 'application/json' },
-});
 
 const isDevMode = process.env.NODE_ENV === 'development';
 

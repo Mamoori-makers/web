@@ -6,7 +6,7 @@ type LoginButtonProps = {
 };
 
 export const LoginButton = ({ platform, children }: LoginButtonProps) => {
-  const AUTH_URL = `${process.env.ENDPOINT}/auth/signin/${platform}`;
+  const AUTH_URL = `${process.env.NEXT_PUBLIC_ENDPOINT}/auth/signin/${platform}`;
 
   return (
     <Link

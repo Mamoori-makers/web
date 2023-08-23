@@ -1,14 +1,8 @@
-import axios from 'axios';
-
 import { ApiPathType } from '@/constants/paths/apiPath';
 
-import type { Options } from './authRequest';
+import { axiosInstance } from './axiosInstance';
 
-const axiosInstance = axios.create({
-  baseURL: 'https://api.mamoori.life',
-  timeout: 10000,
-  headers: { 'Content-Type': 'application/json' },
-});
+import type { Options } from './authRequest';
 
 export const getRequest = async (apiPath: ApiPathType, options?: Options) => {
   try {
